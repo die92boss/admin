@@ -45,9 +45,7 @@ net localgroup administrators NomeUtente /add
 - Alla schermata di accesso, seleziona **Altro utente**
 - Inserisci le credenziali dell’account appena creato
 - **IMPORTANTE**: metti `.\` prima del nome utente per forzare l’accesso locale:
-  ```
-  .\NomeUtente
-  ```
+  ```.\NomeUtente```
 
 ### 8. Verifica dei privilegi
 Dopo l’accesso, premi `Win + X` e clicca su **Terminale (Admin)** per verificare di avere i privilegi da amministratore.
