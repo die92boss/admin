@@ -97,9 +97,9 @@ Scarica lo strumento dal seguente link e salvalo sul Desktop o in una cartella f
     - Clicca con il tasto destro su "Prompt dei comandi" e seleziona "Esegui come amministratore".
 - Naviga alla directory dove hai salvato `esetuninstaller.exe`. Ad esempio, se l'hai salvato sul Desktop del tuo utente:
   ```
-  cd C:\Users\TuoNomeUtente\Desktop
+  cd C:\Users\NomeUtente\Desktop
   ```
-  *(Sostituisci `TuoNomeUtente` con il nome effettivo del tuo profilo utente)*
+  *(Sostituisci `NomeUtente` con il nome effettivo del tuo profilo utente)*
 - Esegui lo strumento digitando:
   ```
   esetuninstaller.exe
