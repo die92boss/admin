@@ -71,7 +71,7 @@ Alla schermata di accesso, l’icona dell’accessibilità ora aprirà di nuovo 
 
 ---
 
-## 🗑️ Parte 3 – Disinstallare Prodotti ESET Manualmente ([KB2289])
+## 🗑️ Parte 3 – Disinstallare Prodotti ESET Manualmente [KB2289]
 
 Questa sezione descrive come utilizzare lo strumento ESET Uninstaller per rimuovere un prodotto ESET quando i metodi di disinstallazione standard falliscono. **Usare questo strumento come ultima risorsa.**
 
