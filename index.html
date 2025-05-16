@@ -37,7 +37,6 @@
 				--link-hover-dark: #90cdf4;
 				--border-color-dark: #4a5568;
 
-				/* --- Colori per il pulsante Toggle (ispirati a List_Pricer.html) --- */
 				--toggle-btn-bg-light: #9ca3af; /* Tailwind gray-400 */
 				--toggle-btn-icon-color: white; /* Icone sono text-white */
 				--toggle-btn-hover-bg-light: #6b7280; /* Tailwind gray-500 */
@@ -79,17 +78,16 @@
 				margin: 0 auto;
 				border-bottom: 1px solid var(--border-color-light);
 				transition: background-color 0.3s ease, border-color 0.3s ease,
-					box-shadow 0.3s ease; /* Aggiunta transizione per box-shadow */
+					box-shadow 0.3s ease;
 
-				/* Arrotondamento solo per gli angoli inferiori dell'header */
 				border-top-left-radius: 0;
 				border-top-right-radius: 0;
-				border-bottom-left-radius: 0.75rem; /* Esempio: 12px */
-				border-bottom-right-radius: 0.75rem; /* Esempio: 12px */
+				border-bottom-left-radius: 0.75rem;
+				border-bottom-right-radius: 0.75rem;
 			}
 			html.dark .site-header {
 				background-color: var(--body-bg-dark);
-				box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4); /* Ombra leggermente più pronunciata in dark mode */
+				box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
 				border-bottom-color: var(--border-color-dark);
 			}
 			.site-header h1 {
@@ -195,7 +193,6 @@
 				border-top-color: var(--border-color-dark);
 			}
 
-			/* --- Stile Pulsante Toggle Dark Mode (ispirato a List_Pricer.html) --- */
 			.theme-toggle-button {
 				background-color: var(--toggle-btn-bg-light);
 				padding: 0.5rem; /* Equivalente a p-2 di Tailwind */
@@ -205,7 +202,7 @@
 				align-items: center;
 				justify-content: center;
 				transition: background-color 0.15s ease-in-out; /* duration-150 */
-				border: none; /* Nessun bordo visibile come in List_Pricer */
+				border: none;
 				line-height: 1; /* Per allineare meglio l'SVG se ci fosse testo */
 			}
 			.theme-toggle-button:hover {
@@ -224,7 +221,6 @@
 			html.dark .theme-toggle-button:hover {
 				background-color: var(--toggle-btn-hover-bg-dark);
 			}
-			/* --- Fine Stile Pulsante Toggle --- */
 
 			.download-button {
 				display: inline-block;
@@ -259,9 +255,7 @@
 				id="themeToggle"
 				class="theme-toggle-button"
 				title="Toggle Light/Dark Mode"
-			>
-				<!-- Icona inserita da JS -->
-			</button>
+			></button>
 		</header>
 
 		<h1>Guida: Creare un Account Admin e Rimuovere ESET su Windows</h1>
@@ -276,16 +270,17 @@
 
 		<h3>1. Riavviare il PC in Modalità di Ripristino</h3>
 		<p>
-			Puoi farlo così: Tieni premuto <strong>Maiusc/Shift</strong> e clicca su
+			Tieni premuto <strong>Maiusc/Shift</strong> e clicca su
 			<strong>Riavvia</strong> dal menu Start.
 		</p>
 
 		<h3>2. Aprire il Prompt dei Comandi</h3>
-		<ul>
-			<li>Seleziona <strong>Risoluzione dei problemi</strong></li>
-			<li>Seleziona <strong>Opzioni avanzate</strong></li>
-			<li>Seleziona <strong>Prompt dei comandi</strong></li>
-		</ul>
+		<p>Dalla schermata di ripristino:</p>
+		<ol style="margin-top: 0.5em; margin-bottom: 0.5em">
+			<li><strong>Risoluzione dei problemi</strong></li>
+			<li><strong>Opzioni avanzate</strong></li>
+			<li><strong>Prompt dei comandi</strong></li>
+		</ol>
 
 		<h3>3. Sostituire Utilman con il Prompt dei comandi</h3>
 		<p>Inserisci i seguenti comandi:</p>
@@ -342,7 +337,7 @@
 
 		<h2>♻️ Parte 2 – Ripristinare Utilman</h2>
 
-		<h3>1. Riavviare nuovamente in Modalità di Ripristino</h3>
+		<h3>1. Riavviare in Modalità di Ripristino</h3>
 		<p>Segui lo stesso procedimento di prima.</p>
 
 		<h3>2. Aprire il Prompt dei Comandi e digitare:</h3>
@@ -396,24 +391,55 @@
 		</p>
 
 		<h3>2. Riavviare il PC in Modalità Provvisoria</h3>
+		<p><strong>Metodo principale</strong> (Opzioni di avvio avanzate):</p>
 		<ul>
 			<li>
-				Premi <code>Win + R</code>, digita <code>msconfig</code> e premi Invio.
+				Tenere premuto il tasto <strong>Maiusc/Shift</strong> e cliccare su
+				<strong>Riavvia</strong> (dal menu Start o dalla schermata di accesso).
 			</li>
-			<li>Vai alla scheda <strong>Opzioni di avvio</strong>.</li>
 			<li>
-				Seleziona <strong>Modalità provvisoria</strong> (opzione "Minima" o
-				"Rete" se necessiti di accesso a internet).
+				Alla schermata di riavvio, selezionare:
+				<ol style="margin-top: 0.5em; margin-bottom: 0.5em">
+					<li><strong>Risoluzione dei problemi</strong></li>
+					<li><strong>Opzioni avanzate</strong></li>
+					<li>
+						<strong>Impostazioni di avvio</strong> (se non visibile, cercare
+						"Visualizza altre opzioni di ripristino")
+					</li>
+				</ol>
 			</li>
-			<li>Clicca <strong>OK</strong> e poi <strong>Riavvia</strong>.</li>
+			<li>Cliccare su <strong>Riavvia</strong>.</li>
 			<li>
-				<em
-					>(In alternativa, tieni premuto <strong>Maiusc/Shift</strong> mentre
-					clicchi su <strong>Riavvia</strong> dal menu Start, poi vai su
-					Risoluzione dei problemi &gt; Opzioni avanzate &gt; Impostazioni di
-					avvio &gt; Riavvia. Al riavvio, premi il tasto numerico corrispondente
-					a "Abilita modalità provvisoria")</em
-				>
+				Al successivo riavvio, premere il tasto numerico corrispondente
+				all'opzione desiderata:
+				<ul style="margin-top: 0.5em">
+					<li>
+						<strong>4</strong> o <strong>F4</strong> per "Abilita modalità
+						provvisoria".
+					</li>
+					<li>
+						<strong>5</strong> o <strong>F5</strong> per "Abilita modalità
+						provvisoria con rete" (se ESET Uninstaller deve essere scaricato).
+					</li>
+				</ul>
+			</li>
+		</ul>
+		<p><strong>Metodo alternativo</strong> (tramite <code>msconfig</code>):</p>
+		<ul>
+			<li>
+				Premere <code>Win + R</code>, digitare <code>msconfig</code> e premere
+				Invio.
+			</li>
+			<li>Accedere alla scheda <strong>Opzioni di avvio</strong>.</li>
+			<li>
+				Selezionare <strong>Modalità provvisoria</strong> ("Minima" o "Rete").
+			</li>
+			<li>Cliccare <strong>OK</strong>, quindi <strong>Riavvia</strong>.</li>
+			<li>
+				<strong>Nota:</strong> Se si utilizza <code>msconfig</code>, è
+				imperativo rieseguire <code>msconfig</code> in Modalità Provvisoria e
+				deselezionare "Modalità provvisoria" prima del riavvio finale, per
+				evitare avvii successivi in questa modalità.
 			</li>
 		</ul>
 
