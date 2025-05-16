@@ -4,7 +4,7 @@ Questa guida ti spiega passo per passo come creare un account amministratore su 
 
 ---
 
-## 🛠️ Parte 1 – Creazione dell'Account Admin
+## 🛠️ Sezione 1 – Creazione dell'Account Admin
 
 ### 1. Riavviare il PC in Modalità di Ripristino
 Puoi farlo così:
@@ -52,7 +52,7 @@ Dopo l’accesso, premi `Win + X` e clicca su **Terminale (Admin)** per verifica
 
 ---
 
-## ♻️ Parte 2 – Ripristinare Utilman
+## ♻️ Sezione 2 – Ripristinare Utilman
 
 ### 1. Riavviare nuovamente in Modalità di Ripristino
 Segui lo stesso procedimento di prima.
@@ -85,11 +85,29 @@ Scarica lo strumento dal seguente link e salvalo sul Desktop o in una cartella f
 [ESET Uninstaller Download](https://download.eset.com/com/eset/tools/installers/eset_apps_remover/latest/esetuninstaller.exe)
 
 ### 2. Riavviare il PC in Modalità Provvisoria
-- Premi `Win + R`, digita `msconfig` e premi Invio.
-- Vai alla scheda **Opzioni di avvio**.
-- Seleziona **Modalità provvisoria** (opzione "Minima" o "Rete" se necessiti di accesso a internet).
-- Clicca **OK** e poi **Riavvia**.
-  *(In alternativa, tieni premuto **Maiusc/Shift** mentre clicchi su **Riavvia** dal menu Start, poi vai su Risoluzione dei problemi > Opzioni avanzate > Impostazioni di avvio > Riavvia. Al riavvio, premi il tasto numerico corrispondente a "Abilita modalità provvisoria")*
+Per eseguire ESET Uninstaller, Windows deve essere avviato in Modalità Provvisoria. Ci sono due metodi principali:
+
+**A) Tramite Opzioni di Avvio Avanzate (Percorso simile alla Modalità di Ripristino):**
+Questo metodo utilizza le stesse schermate di avvio avanzato viste nella Parte 1 per accedere alla Modalità di Ripristino.
+1.  Tieni premuto il tasto **Maiusc/Shift** e, contemporaneamente, clicca su **Riavvia** dal menu Start (o dalla schermata di login).
+2.  Il PC si riavvierà mostrando una schermata blu. Seleziona **Risoluzione dei problemi**.
+3.  Poi seleziona **Opzioni avanzate**.
+4.  Ora, invece di "Prompt dei comandi" (come nella Parte 1), seleziona **Impostazioni di avvio**.
+    *(Se "Impostazioni di avvio" non è subito visibile, potresti dover cliccare su "Visualizza altre opzioni di ripristino").*
+5.  Clicca sul pulsante **Riavvia**.
+6.  Dopo il riavvio, vedrai un elenco di opzioni. Premi il tasto numerico corrispondente a **Abilita modalità provvisoria** (solitamente `4` o `F4`). Se hai bisogno di accesso a Internet (ad esempio, per scaricare di nuovo lo strumento), scegli **Abilita modalità provvisoria con rete** (solitamente `5` o `F5`).
+
+**B) Tramite `msconfig` (Configurazione di Sistema):**
+Questo metodo modifica temporaneamente la configurazione di avvio di Windows.
+1.  Premi i tasti `Win + R` per aprire la finestra "Esegui".
+2.  Digita `msconfig` e premi Invio (o clicca OK).
+3.  Nella finestra "Configurazione di sistema", vai alla scheda **Opzioni di avvio**.
+4.  Nella sezione "Opzioni di avvio", spunta la casella **Modalità provvisoria**.
+5.  Assicurati che sia selezionata l'opzione "Minima" sotto la casella. Se hai bisogno di accesso a Internet, seleziona "Rete".
+6.  Clicca **OK** e poi **Riavvia** quando richiesto dal sistema.
+    **Importante:** Dopo aver completato le operazioni in Modalità Provvisoria e prima di riavviare il PC normalmente, dovrai rieseguire `msconfig` e **deselezionare** la casella "Modalità provvisoria" per evitare che il PC continui ad avviarsi in questa modalità.
+
+*Scegli il metodo che ti risulta più comodo. Il metodo A effettua un singolo avvio in Modalità Provvisoria. Il metodo B modifica la configurazione di avvio finché non viene annullata manualmente.*
 
 ### 3. Eseguire ESET Uninstaller
 - Una volta in Modalità Provvisoria, apri il **Prompt dei comandi come amministratore**:
@@ -110,7 +128,7 @@ Scarica lo strumento dal seguente link e salvalo sul Desktop o in una cartella f
 - Al termine del processo, lo strumento ti chiederà di riavviare il computer. Premi un tasto qualsiasi per chiudere lo strumento.
 
 ### 4. Riavviare in Modalità Normale
-- Prima di riavviare, se hai usato `msconfig` per entrare in Modalità Provvisoria, rieseguilo e deseleziona "Modalità provvisoria" nella scheda "Opzioni di avvio".
+- Prima di riavviare, se hai usato `msconfig` per entrare in Modalità Provvisoria (Metodo B), rieseguilo e deseleziona "Modalità provvisoria" nella scheda "Opzioni di avvio". Se hai usato il Metodo A, non devi fare nulla di specifico, il PC si avvierà normalmente.
 - Riavvia il computer.
 - Dopo il riavvio, elimina il file `esetuninstaller.exe` dal Desktop (o da dove l'avevi salvato).
 
