@@ -82,7 +82,7 @@ Questa sezione descrive come utilizzare lo strumento ESET Uninstaller per rimuov
 
 ### 1. Scaricare ESET Uninstaller
 Scarica lo strumento dal seguente link e salvalo sul Desktop o in una cartella facilmente accessibile:
-[ESET Uninstaller Download](https://download.eset.com/com/eset/tools/installers/eset_apps_remover/latest/esetuninstaller.exe)
+[ESET Uninstaller Download](https://download.eset.com/com/eset/tools/installers/eset_apps_remover/latest/uninstaller.exe)
 
 ### 2. Riavviare il PC in Modalità Provvisoria
 Per eseguire ESET Uninstaller, Windows deve essere avviato in Modalità Provvisoria. Ci sono due metodi principali:
