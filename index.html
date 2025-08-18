@@ -110,6 +110,11 @@
 				color: var(--heading-text-dark);
 			}
 
+			/* Add scroll margin to headings with IDs to offset for the fixed header */
+			h2[id] {
+				scroll-margin-top: 6rem;
+			}
+
 			code,
 			pre {
 				background-color: var(--code-bg-light);
@@ -193,6 +198,101 @@
 				border-top-color: var(--border-color-dark);
 			}
 
+			/* Specific list margins to replace inline styles */
+			h3 + p + ol,
+			li > ol {
+				margin-top: 0.5em;
+				margin-bottom: 0.5em;
+			}
+			li > ul {
+				margin-top: 0.5em;
+			}
+
+			/* Footer paragraph style */
+			body > p:last-of-type {
+				text-align: center;
+				margin-top: 2em;
+				opacity: 0.7;
+			}
+
+			/* Table of Contents */
+			.toc {
+				background: var(--code-bg-light);
+				border: 1px solid var(--border-color-light);
+				padding: 1em;
+				border-radius: 8px;
+				margin-bottom: 2em;
+			}
+			html.dark .toc {
+				background: var(--code-bg-dark);
+				border-color: var(--border-color-dark);
+			}
+			.toc h2 {
+				margin-top: 0;
+				margin-bottom: 0.75em;
+			}
+			.toc ul {
+				padding-left: 0;
+				list-style-type: none;
+				margin: 0;
+			}
+			.toc li {
+				margin-bottom: 0.25em;
+				border-radius: 6px;
+				transition: background-color 0.2s ease-in-out;
+			}
+			.toc li:hover {
+				background-color: rgba(0, 0, 0, 0.05);
+			}
+			html.dark .toc li:hover {
+				background-color: rgba(255, 255, 255, 0.08);
+			}
+			div.toc ul li a,
+			div.toc ul li a:hover {
+				color: var(--body-text-light);
+				text-decoration: none;
+			}
+			html.dark div.toc ul li a,
+			html.dark div.toc ul li a:hover {
+				color: var(--body-text-dark);
+			}
+			.toc a {
+				display: block;
+				padding: 0.5em 1em;
+			}
+
+			/* Copy Button for Code Blocks */
+			pre {
+				position: relative;
+			}
+			.copy-btn {
+				position: absolute;
+				top: 0.5em;
+				right: 0.5em;
+				background-color: var(--toggle-btn-bg-light);
+				color: var(--toggle-btn-icon-color);
+				border: none;
+				padding: 0.3em 0.6em;
+				border-radius: 4px;
+				cursor: pointer;
+				font-size: 0.9em;
+				opacity: 0.7;
+				transition: opacity 0.2s ease, background-color 0.2s ease;
+			}
+			.copy-btn:hover {
+				opacity: 1;
+				background-color: var(--toggle-btn-hover-bg-light);
+			}
+			html.dark .copy-btn {
+				background-color: var(--toggle-btn-bg-dark);
+			}
+			html.dark .copy-btn:hover {
+				background-color: var(--toggle-btn-hover-bg-dark);
+			}
+			.copy-btn.copied {
+				background-color: #28a745; /* Success green */
+			}
+
 			.theme-toggle-button {
 				background-color: var(--toggle-btn-bg-light);
 				padding: 0.5rem; /* Equivalente a p-2 di Tailwind */
@@ -214,6 +314,21 @@
 				stroke: var(--toggle-btn-icon-color); /* Icona bianca come text-white */
 				fill: none;
 				stroke-width: 1.5; /* Coerente con gli SVG forniti */
+			}
+
+			/* Show moon icon in light mode */
+			html:not(.dark) .icon-sun {
+				display: none;
+			}
+			html:not(.dark) .icon-moon {
+				display: block;
+			}
+			/* Show sun icon in dark mode */
+			html.dark .icon-moon {
+				display: none;
+			}
+			html.dark .icon-sun {
+				display: block;
 			}
 			html.dark .theme-toggle-button {
 				background-color: var(--toggle-btn-bg-dark);
@@ -254,8 +369,34 @@
 			<button
 				id="themeToggle"
 				class="theme-toggle-button"
+				aria-label="Toggle theme"
 				title="Toggle Light/Dark Mode"
-			></button>
+			>
+				<svg
+					class="icon-sun"
+					xmlns="http://www.w3.org/2000/svg"
+					viewBox="0 0 24 24"
+					stroke-width="1.5"
+				>
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z"
+					/>
+				</svg>
+				<svg
+					class="icon-moon"
+					xmlns="http://www.w3.org/2000/svg"
+					viewBox="0 0 24 24"
+					stroke-width="1.5"
+				>
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						d="M21.752 15.002A9.718 9.718 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z"
+					/>
+				</svg>
+			</button>
 		</header>
 
 		<h1>Guida: Creare un Account Admin e Rimuovere ESET su Windows</h1>
@@ -264,9 +405,38 @@
 			amministratore su un PC Windows usando il Prompt dei comandi dalla
 			modalità di ripristino, e come disinstallare manualmente prodotti ESET.
 		</p>
+
+		<div class="toc">
+			<h2>Indice dei Contenuti</h2>
+			<ul>
+				<li><a href="#prerequisiti">1. Prerequisiti</a></li>
+				<li><a href="#part1">2. Creazione dell'Account Admin</a></li>
+				<li><a href="#part2">3. Ripristinare Utilman</a></li>
+				<li><a href="#part3">4. Disinstallare Prodotti ESET</a></li>
+				<li><a href="#sicurezza">5. Note sulla Sicurezza</a></li>
+			</ul>
+		</div>
+
+		<h2 id="prerequisiti">1. Prerequisiti</h2>
+		<ul>
+			<li>
+				<strong>Accesso fisico</strong> al computer. Questa procedura non può
+				essere eseguita da remoto.
+			</li>
+			<li>
+				Una conoscenza di base di come navigare nel
+				<strong>Prompt dei comandi</strong> (<code>cd</code>, <code>dir</code>,
+				etc.).
+			</li>
+			<li>
+				Un <strong>backup dei dati importanti</strong>. Sebbene la procedura sia
+				relativamente sicura, è sempre buona norma avere un backup prima di
+				apportare modifiche a livello di sistema.
+			</li>
+		</ul>
 		<hr />
 
-		<h2>🛠️ Parte 1 – Creazione dell'Account Admin</h2>
+		<h2 id="part1">2. 🛠️ Creazione dell'Account Admin</h2>
 
 		<h3>1. Riavviare il PC in Modalità di Ripristino</h3>
 		<p>
@@ -276,18 +446,18 @@
 
 		<h3>2. Aprire il Prompt dei Comandi</h3>
 		<p>Dalla schermata di ripristino:</p>
-		<ol style="margin-top: 0.5em; margin-bottom: 0.5em">
+		<ol>
 			<li><strong>Risoluzione dei problemi</strong></li>
 			<li><strong>Opzioni avanzate</strong></li>
 			<li><strong>Prompt dei comandi</strong></li>
 		</ol>
 
 		<h3>3. Sostituire Utilman con il Prompt dei comandi</h3>
-		<p>Inserisci i seguenti comandi:</p>
-		<pre><code>C:
- cd Windows\System32
- ren Utilman.exe Utilman.exe.bak
- copy cmd.exe Utilman.exe</code></pre>
+		<p>Inserisci i seguenti comandi, uno alla volta, premendo Invio dopo ognuno:</p>
+		<pre><button class="copy-btn" title="Copy to Clipboard">Copia</button><code>C:</code></pre>
+		<pre><button class="copy-btn" title="Copy to Clipboard">Copia</button><code>cd Windows\System32</code></pre>
+		<pre><button class="copy-btn" title="Copy to Clipboard">Copia</button><code>ren Utilman.exe Utilman.exe.bak</code></pre>
+		<pre><button class="copy-btn" title="Copy to Clipboard">Copia</button><code>copy cmd.exe Utilman.exe</code></pre>
 		<div class="note">
 			La lettera potrebbe variare in base alla partizione dove è installato
 			Windows; di default è <code>C</code>.
@@ -310,10 +480,10 @@
 		<h3>6. Creare l’account amministratore</h3>
 		<p>
 			Sostituisci <code>NomeUtente</code> e <code>Password</code> con i dati
-			desiderati:
+			desiderati ed esegui questi due comandi, uno alla volta:
 		</p>
-		<pre><code>net user NomeUtente Password /add
- net localgroup administrators NomeUtente /add</code></pre>
+		<pre><button class="copy-btn" title="Copy to Clipboard">Copia</button><code>net user NomeUtente Password /add</code></pre>
+		<pre><button class="copy-btn" title="Copy to Clipboard">Copia</button><code>net localgroup administrators NomeUtente /add</code></pre>
 
 		<h3>7. Accedere con il nuovo utente</h3>
 		<ul>
@@ -335,16 +505,16 @@
 		</p>
 		<hr />
 
-		<h2>♻️ Parte 2 – Ripristinare Utilman</h2>
+		<h2 id="part2">3. ♻️ Ripristinare Utilman</h2>
 
 		<h3>1. Riavviare in Modalità di Ripristino</h3>
 		<p>Segui lo stesso procedimento di prima.</p>
 
-		<h3>2. Aprire il Prompt dei Comandi e digitare:</h3>
-		<pre><code>C:
- cd Windows\System32
- del Utilman.exe
- ren Utilman.exe.bak Utilman.exe</code></pre>
+		<h3>2. Aprire il Prompt dei Comandi e digitare i seguenti comandi, uno alla volta:</h3>
+		<pre><button class="copy-btn" title="Copy to Clipboard">Copia</button><code>C:</code></pre>
+		<pre><button class="copy-btn" title="Copy to Clipboard">Copia</button><code>cd Windows\System32</code></pre>
+		<pre><button class="copy-btn" title="Copy to Clipboard">Copia</button><code>del Utilman.exe</code></pre>
+		<pre><button class="copy-btn" title="Copy to Clipboard">Copia</button><code>ren Utilman.exe.bak Utilman.exe</code></pre>
 
 		<h3>3. Riavviare il PC</h3>
 		<p>
@@ -353,7 +523,7 @@
 		</p>
 		<hr />
 
-		<h2>🗑️ Parte 3 – Disinstallare Prodotti ESET Manualmente [KB2289]</h2>
+		<h2 id="part3">4. 🗑️ Disinstallare Prodotti ESET</h2>
 		<p>
 			Questa sezione descrive come utilizzare lo strumento ESET Uninstaller per
 			rimuovere un prodotto ESET quando i metodi di disinstallazione standard
@@ -382,7 +552,7 @@
 			Scarica lo strumento dal seguente link e salvalo sul Desktop o in una
 			cartella facilmente accessibile:<br /><br />
 			<a
-				href="https://download.eset.com/com/eset/tools/installers/eset_apps_remover/latest/uninstaller.exe"
+				href="https://download.eset.com/com/eset/tools/installers/eset_apps_remover/latest/esetuninstaller.exe"
 				target="_blank"
 				rel="noopener noreferrer"
 				class="download-button"
@@ -391,7 +561,7 @@
 		</p>
 
 		<h3>2. Riavviare il PC in Modalità Provvisoria</h3>
-		<p><strong>A. Metodo principale</strong> (Opzioni di avvio avanzate):</p>
+		<p><strong>Metodo principale</strong> (Opzioni di avvio avanzate):</p>
 		<ul>
 			<li>
 				Tenere premuto il tasto <strong>Maiusc/Shift</strong> e cliccare su
@@ -399,7 +569,7 @@
 			</li>
 			<li>
 				Alla schermata di riavvio, selezionare:
-				<ol style="margin-top: 0.5em; margin-bottom: 0.5em">
+				<ol>
 					<li><strong>Risoluzione dei problemi</strong></li>
 					<li><strong>Opzioni avanzate</strong></li>
 					<li>
@@ -412,7 +582,7 @@
 			<li>
 				Al successivo riavvio, premere il tasto numerico corrispondente
 				all'opzione desiderata:
-				<ul style="margin-top: 0.5em">
+				<ul>
 					<li>
 						<strong>4</strong> o <strong>F4</strong> per "Abilita modalità
 						provvisoria".
@@ -424,7 +594,7 @@
 				</ul>
 			</li>
 		</ul>
-		<p><strong>B. Metodo alternativo</strong> (tramite <code>msconfig</code>):</p>
+		<p><strong>Metodo alternativo</strong> (tramite <code>msconfig</code>):</p>
 		<ul>
 			<li>
 				Premere <code>Win + R</code>, digitare <code>msconfig</code> e premere
@@ -437,7 +607,7 @@
 			<li>Cliccare <strong>OK</strong>, quindi <strong>Riavvia</strong>.</li>
 			<li>
 				<strong>Nota:</strong> Se si utilizza <code>msconfig</code>, è
-				obbligatorio rieseguire <code>msconfig</code> e
+				imperativo rieseguire <code>msconfig</code> in Modalità Provvisoria e
 				deselezionare "Modalità provvisoria" prima del riavvio finale, per
 				evitare avvii successivi in questa modalità.
 			</li>
@@ -459,7 +629,7 @@
 			<li>
 				Naviga alla directory dove hai salvato <code>esetuninstaller.exe</code>.
 				Ad esempio, se l'hai salvato sul Desktop del tuo utente:
-				<pre><code>cd C:\Users\NomeUtente\Desktop</code></pre>
+				<pre><button class="copy-btn" title="Copy to Clipboard">Copia</button><code>cd C:\Users\NomeUtente\Desktop</code></pre>
 				<em
 					>(Sostituisci <code>NomeUtente</code> con il nome effettivo del tuo
 					profilo utente)</em
@@ -467,7 +637,7 @@
 			</li>
 			<li>
 				Esegui lo strumento digitando:
-				<pre><code>esetuninstaller.exe</code></pre>
+				<pre><button class="copy-btn" title="Copy to Clipboard">Copia</button><code>esetuninstaller.exe</code></pre>
 			</li>
 			<li>
 				Leggi attentamente le avvertenze e digita <code>y</code> per confermare.
@@ -487,7 +657,7 @@
 		<ul>
 			<li>
 				Prima di riavviare, se hai usato <code>msconfig</code> per entrare in
-				Modalità Provvisoria (Metodo B), rieseguilo e deseleziona "Modalità provvisoria"
+				Modalità Provvisoria, rieseguilo e deseleziona "Modalità provvisoria"
 				nella scheda "Opzioni di avvio".
 			</li>
 			<li>Riavvia il computer.</li>
@@ -499,7 +669,7 @@
 		<p>Il prodotto ESET dovrebbe essere stato rimosso.</p>
 		<hr />
 
-		<h2>ℹ️ Note finali</h2>
+		<h2 id="sicurezza">5. ℹ️ Note sulla Sicurezza</h2>
 		<ul>
 			<li>
 				<strong>Maiusc/Shift ≠ Bloc Maiusc</strong>: usa il tasto corretto!
@@ -509,12 +679,12 @@
 				l’account principale o hai problemi con software specifici.
 			</li>
 			<li>
-				Usali solo in contesti leciti e con autorizzazione, o sul tuo personale
-				computer.
+				Usali solo in contesti leciti e con autorizzazione, o sul tuo 
+				computer personale.
 			</li>
 		</ul>
 
-		<p style="text-align: center; margin-top: 2em; opacity: 0.7">
+		<p>
 			© Guida a scopo didattico
 		</p>
 
@@ -522,25 +692,15 @@
 			const themeToggle = document.getElementById("themeToggle");
 			const htmlElement = document.documentElement;
 
-			const sunIcon = `
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" />
-      </svg>`;
-
-			const moonIcon = `
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z" />
-      </svg>`;
-
 			function applyTheme(theme) {
 				if (theme === "dark") {
 					htmlElement.classList.add("dark");
-					themeToggle.innerHTML = sunIcon;
 					themeToggle.setAttribute("title", "Passa a Light Mode");
+					themeToggle.setAttribute("aria-label", "Switch to light mode");
 				} else {
 					htmlElement.classList.remove("dark");
-					themeToggle.innerHTML = moonIcon;
 					themeToggle.setAttribute("title", "Passa a Dark Mode");
+					themeToggle.setAttribute("aria-label", "Switch to dark mode");
 				}
 			}
 
@@ -550,6 +710,29 @@
 				applyTheme(newTheme);
 				localStorage.setItem("themePreference", newTheme);
 			}
+
+			// --- Copy to Clipboard Functionality ---
+			document.querySelectorAll(".copy-btn").forEach((button) => {
+				button.addEventListener("click", () => {
+					const codeBlock = button.nextElementSibling; // The <code> element
+					const textToCopy = codeBlock.innerText;
+
+					navigator.clipboard
+						.writeText(textToCopy)
+						.then(() => {
+							button.textContent = "Copiato!";
+							button.classList.add("copied");
+							setTimeout(() => {
+								button.textContent = "Copia";
+								button.classList.remove("copied");
+							}, 2000);
+						})
+						.catch((err) => {
+							console.error("Failed to copy text: ", err);
+							button.textContent = "Errore";
+						});
+				});
+			});
 
 			const savedTheme = localStorage.getItem("themePreference");
 			const systemPrefersDark = window.matchMedia(
