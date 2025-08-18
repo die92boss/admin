@@ -18,7 +18,7 @@ Questa guida ti spiega passo per passo come creare un account amministratore su 
 
 ---
 
-## 2. 🛠️ Creazione dell'Account Admin
+## 2. Creazione dell'Account Admin
 
 ### 1. Riavviare il PC in Modalità di Ripristino
 Tieni premuto **Maiusc/Shift** e clicca su **Riavvia** dal menu Start.
@@ -72,7 +72,7 @@ Dopo l’accesso, premi `Win + X` e clicca su **Terminale (Admin)** per verifica
 
 ---
 
-## 3. ♻️ Ripristinare Utilman
+## 3. Ripristinare Utilman
 
 ### 1. Riavviare in Modalità di Ripristino
 Segui lo stesso procedimento di prima.
@@ -96,7 +96,7 @@ Alla schermata di accesso, l’icona dell’accessibilità ora aprirà di nuovo 
 
 ---
 
-## 4. 🗑️ Disinstallare Prodotti ESET
+## 4. Disinstallare Prodotti ESET
 
 Questa sezione descrive come utilizzare lo strumento ESET Uninstaller per rimuovere un prodotto ESET quando i metodi di disinstallazione standard falliscono. **Usare questo strumento come ultima risorsa.**
 
@@ -156,7 +156,7 @@ Il prodotto ESET dovrebbe essere stato rimosso.
 
 ---
 
-## 5. ℹ️ Note sulla Sicurezza
+## 5. Note sulla Sicurezza
 - **Maiusc/Shift ≠ Bloc Maiusc**: usa il tasto corretto!
 - Questi metodi sono utili se hai accesso fisico al PC ma hai perso l’account principale o hai problemi con software specifici.
 - Usali solo in contesti leciti e con autorizzazione, o sul tuo personale computer.
