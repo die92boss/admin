@@ -4,10 +4,10 @@ Questa guida ti spiega passo per passo come creare un account amministratore su 
 
 ## Indice dei Contenuti
 1. [Prerequisiti](#1-prerequisiti)
-2. [Creazione dell'Account Admin](#2--creazione-dellaccount-admin)
-3. [Ripristinare Utilman](#3--ripristinare-utilman)
-4. [Disinstallare Prodotti ESET](#4--disinstallare-prodotti-eset)
-5. [Note sulla Sicurezza](#5--note-sulla-sicurezza)
+2. [Creazione dell'Account Admin](#2-creazione-dellaccount-admin)
+3. [Ripristinare Utilman](#3-ripristinare-utilman)
+4. [Disinstallare Prodotti ESET](#4-disinstallare-prodotti-eset)
+5. [Note sulla Sicurezza](#5-note-sulla-sicurezza)
 
 ---
 
