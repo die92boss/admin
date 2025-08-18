@@ -77,7 +77,8 @@ Dopo l’accesso, premi `Win + X` e clicca su **Terminale (Admin)** per verifica
 ### 1. Riavviare in Modalità di Ripristino
 Segui lo stesso procedimento di prima.
 
-### 2. Aprire il Prompt dei Comandi e digitare i seguenti comandi, uno alla volta:
+### 2. Aprire il Prompt dei Comandi
+Inserisci i seguenti comandi, uno alla volta, premendo Invio dopo ognuno:
 ```
 C:
 ```
