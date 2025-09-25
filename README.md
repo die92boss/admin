@@ -134,14 +134,14 @@ Scarica lo strumento dal seguente link e salvalo sul Desktop o in una cartella f
 - Una volta in Modalità Provvisoria, apri il **Prompt dei comandi come amministratore**:
   - Cerca "cmd" nel menu Start.
   - Clicca con il tasto destro su "Prompt dei comandi" e seleziona "Esegui come amministratore".
-- Naviga alla directory dove hai salvato `esetuninstaller.exe`. Ad esempio, se l'hai salvato sul Desktop del tuo utente:
+- Naviga alla directory dove hai salvato `uninstaller.exe`. Ad esempio, se l'hai salvato sul Desktop del tuo utente:
   ```
   cd C:\Users\NomeUtente\Desktop
   ```
   *(Sostituisci `NomeUtente` con il nome effettivo del tuo profilo utente)*
 - Esegui lo strumento digitando:
   ```
-  esetuninstaller.exe
+  uninstaller.exe
   ```
 - Leggi attentamente le avvertenze e digita `y` per confermare.
 - Lo strumento elencherà i prodotti ESET installati. Digita il numero corrispondente al prodotto che vuoi rimuovere e premi Invio.
@@ -151,7 +151,7 @@ Scarica lo strumento dal seguente link e salvalo sul Desktop o in una cartella f
 ### 4. Riavviare in Modalità Normale
 - Prima di riavviare, se hai usato `msconfig` per entrare in Modalità Provvisoria, rieseguilo e deseleziona "Modalità provvisoria" nella scheda "Opzioni di avvio".
 - Riavvia il computer.
-- Dopo il riavvio, elimina il file `esetuninstaller.exe` dal Desktop (o da dove l'avevi salvato).
+- Dopo il riavvio, elimina il file `uninstaller.exe` dal Desktop (o da dove l'avevi salvato).
 
 Il prodotto ESET dovrebbe essere stato rimosso.
 
