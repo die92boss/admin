@@ -992,12 +992,12 @@
 						}
 					});
 				} else {
+					// Greedy selection: Find the last section that has been scrolled past
 					sections.forEach((current) => {
-						const sectionHeight = current.offsetHeight || 100; // fallback height
 						const sectionTop = current.offsetTop - 150; // Offset for header
 						const sectionId = current.getAttribute("id");
 
-						if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+						if (scrollY >= sectionTop) {
 							navLinks.forEach((link) => {
 								if (link.getAttribute("href").includes(sectionId)) {
 									activeLink = link;
@@ -1032,8 +1032,16 @@
 					navMarker.style.top = `${activeLink.offsetTop}px`;
 					navMarker.classList.remove("opacity-0");
 				} else {
-					// Optional: keep it at the last known position or fade out
-					// navMarker.classList.add('opacity-0');
+					// No active section (e.g., at the top of the page)
+					navMarker.classList.add("opacity-0");
+					navLinks.forEach((link) => {
+						link.classList.remove(
+							"text-blue-600",
+							"dark:text-blue-400",
+							"font-medium",
+						);
+						link.classList.add("text-slate-500", "dark:text-slate-400");
+					});
 				}
 			}
 			// Trigger once on load to set initial position
