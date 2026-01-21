@@ -1,697 +1,883 @@
-<!DOCTYPE html>
-<html lang="it">
+<!doctype html>
+<html lang="it" class="scroll-smooth">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="icon" href="favicon.ico" type="image/x-icon" />
 		<title>Guida Admin Windows</title>
-		<style>
-			:root {
-				--body-bg-light: #f9f9f9;
-				--body-text-light: #333;
-				--heading-text-light: #1a1a1a;
-				--code-bg-light: #eee;
-				--code-text-light: #333;
-				--note-bg-light: #d1ecf1;
-				--note-border-light: #0c5460;
-				--note-text-light: #0c5460;
-				--warning-bg-light: #fff3cd;
-				--warning-border-light: #ffeeba;
-				--warning-text-light: #856404;
-				--link-color-light: #007bff;
-				--link-hover-light: #0056b3;
-				--border-color-light: #ddd;
 
-				--body-bg-dark: #1a202c;
-				--body-text-dark: #e2e8f0;
-				--heading-text-dark: #f7fafc;
-				--code-bg-dark: #2d3748;
-				--code-text-dark: #e2e8f0;
-				--note-bg-dark: #2c3e50;
-				--note-border-dark: #3498db;
-				--note-text-dark: #ecf0f1;
-				--warning-bg-dark: #4d3d00;
-				--warning-border-dark: #f39c12;
-				--warning-text-dark: #fef9e7;
-				--link-color-dark: #63b3ed;
-				--link-hover-dark: #90cdf4;
-				--border-color-dark: #4a5568;
+		<!-- Tailwind CSS -->
+		<script src="https://cdn.tailwindcss.com"></script>
+		<script>
+			tailwind.config = {
+				darkMode: "class",
+				theme: {
+					extend: {
+						fontFamily: {
+							sans: ["Outfit", "sans-serif"],
+							mono: ["Consolas", "monospace"],
+						},
+					},
+				},
+			};
+		</script>
 
-				--toggle-btn-bg-light: #9ca3af; /* Tailwind gray-400 */
-				--toggle-btn-icon-color: white; /* Icone sono text-white */
-				--toggle-btn-hover-bg-light: #6b7280; /* Tailwind gray-500 */
-
-				--toggle-btn-bg-dark: #374151; /* Tailwind gray-700 */
-				--toggle-btn-hover-bg-dark: #4b5563; /* Tailwind gray-600 */
-			}
-
-			body {
-				font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-				background-color: var(--body-bg-light);
-				color: var(--body-text-light);
-				line-height: 1.6;
-				max-width: 800px;
-				margin: 0 auto;
-				padding: 1rem;
-				padding-top: 5rem;
-				transition: background-color 0.3s ease, color 0.3s ease;
-			}
-
-			html.dark body {
-				background-color: var(--body-bg-dark);
-				color: var(--body-text-dark);
-			}
-
-			.site-header {
-				position: fixed;
-				top: 0;
-				left: 0;
-				right: 0;
-				display: flex;
-				justify-content: space-between;
-				align-items: center;
-				padding: 0.75rem 1rem;
-				background-color: var(--body-bg-light);
-				box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-				z-index: 1000;
-				max-width: 800px;
-				margin: 0 auto;
-				border-bottom: 1px solid var(--border-color-light);
-				transition: background-color 0.3s ease, border-color 0.3s ease,
-					box-shadow 0.3s ease;
-
-				border-top-left-radius: 0;
-				border-top-right-radius: 0;
-				border-bottom-left-radius: 0.75rem;
-				border-bottom-right-radius: 0.75rem;
-			}
-			html.dark .site-header {
-				background-color: var(--body-bg-dark);
-				box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
-				border-bottom-color: var(--border-color-dark);
-			}
-			.site-header h1 {
-				margin: 0;
-				font-size: 1.5em;
-			}
-			body > h1:first-of-type {
-				margin-top: 1rem;
-			}
-
-			h1,
-			h2,
-			h3 {
-				color: var(--heading-text-light);
-				transition: color 0.3s ease;
-			}
-			html.dark h1,
-			html.dark h2,
-			html.dark h3 {
-				color: var(--heading-text-dark);
-			}
-
-			/* Add scroll margin to headings with IDs to offset for the fixed header */
-			h2[id] {
-				scroll-margin-top: 6rem;
-			}
-
-			code,
-			pre {
-				background-color: var(--code-bg-light);
-				color: var(--code-text-light);
-				padding: 0.3em 0.6em;
-				border-radius: 4px;
-				font-family: Consolas, monospace;
-				transition: background-color 0.3s ease, color 0.3s ease;
-			}
-			pre {
-				padding: 0;
-				border: 1px solid var(--border-color-light);
-			}
-			pre code {
-				display: block;
-				padding: 1em;
-				overflow-x: auto;
-			}
-			html.dark code,
-			html.dark pre {
-				background-color: var(--code-bg-dark);
-				color: var(--code-text-dark);
-				border-color: var(--border-color-dark);
-			}
-
-			.note {
-				background: var(--note-bg-light);
-				border-left: 4px solid var(--note-border-light);
-				color: var(--note-text-light);
-				padding: 0.5em 1em;
-				margin: 1em 0;
-				transition: background-color 0.3s ease, color 0.3s ease,
-					border-color 0.3s ease;
-			}
-			html.dark .note {
-				background: var(--note-bg-dark);
-				border-left-color: var(--note-border-dark);
-				color: var(--note-text-dark);
-			}
-
-			.warning {
-				background: var(--warning-bg-light);
-				border-left: 4px solid var(--warning-border-light);
-				color: var(--warning-text-light);
-				padding: 0.5em 1em;
-				margin: 1em 0;
-				transition: background-color 0.3s ease, color 0.3s ease,
-					border-color 0.3s ease;
-			}
-			html.dark .warning {
-				background: var(--warning-bg-dark);
-				border-left-color: var(--warning-border-dark);
-				color: var(--warning-text-dark);
-			}
-
-			a {
-				color: var(--link-color-light);
-				text-decoration: none;
-				transition: color 0.3s ease;
-			}
-			a:hover {
-				color: var(--link-hover-light);
-				text-decoration: underline;
-			}
-			html.dark a {
-				color: var(--link-color-dark);
-			}
-			html.dark a:hover {
-				color: var(--link-hover-dark);
-			}
-
-			ul {
-				padding-left: 20px;
-			}
-			li {
-				margin-bottom: 0.5em;
-			}
-			hr {
-				border: 0;
-				border-top: 1px solid var(--border-color-light);
-				margin: 2em 0;
-				transition: border-color 0.3s ease;
-			}
-			html.dark hr {
-				border-top-color: var(--border-color-dark);
-			}
-
-			/* Specific list margins to replace inline styles */
-			h3 + p + ol,
-			li > ol {
-				margin-top: 0.5em;
-				margin-bottom: 0.5em;
-			}
-			li > ul {
-				margin-top: 0.5em;
-			}
-
-			/* Footer paragraph style */
-			body > p:last-of-type {
-				text-align: center;
-				margin-top: 2em;
-				opacity: 0.7;
-			}
-
-			/* Table of Contents */
-			.toc {
-				background: var(--code-bg-light);
-				border: 1px solid var(--border-color-light);
-				padding: 1em;
-				border-radius: 8px;
-				margin-bottom: 2em;
-			}
-			html.dark .toc {
-				background: var(--code-bg-dark);
-				border-color: var(--border-color-dark);
-			}
-			.toc h2 {
-				margin-top: 0;
-				margin-bottom: 0.75em;
-			}
-			.toc ul {
-				padding-left: 0;
-				list-style-type: none;
-				margin: 0;
-			}
-			.toc li {
-				margin-bottom: 0.25em;
-				border-radius: 6px;
-				transition: background-color 0.2s ease-in-out;
-			}
-			.toc li:hover {
-				background-color: rgba(0, 0, 0, 0.05);
-			}
-			html.dark .toc li:hover {
-				background-color: rgba(255, 255, 255, 0.08);
-			}
-			div.toc ul li a,
-			div.toc ul li a:hover {
-				color: var(--body-text-light);
-				text-decoration: none;
-			}
-			html.dark div.toc ul li a,
-			html.dark div.toc ul li a:hover {
-				color: var(--body-text-dark);
-			}
-			.toc a {
-				display: block;
-				padding: 0.5em 1em;
-			}
-
-			/* Copy Button for Code Blocks */
-			pre {
-				position: relative;
-			}
-			.copy-btn {
-				position: absolute;
-				top: 0.5em;
-				right: 0.5em;
-				background-color: var(--toggle-btn-bg-light);
-				color: var(--toggle-btn-icon-color);
-				border: none;
-				padding: 0.3em 0.6em;
-				border-radius: 4px;
-				cursor: pointer;
-				font-size: 0.9em;
-				opacity: 0.7;
-				transition: opacity 0.2s ease, background-color 0.2s ease;
-			}
-			.copy-btn:hover {
-				opacity: 1;
-				background-color: var(--toggle-btn-hover-bg-light);
-			}
-			html.dark .copy-btn {
-				background-color: var(--toggle-btn-bg-dark);
-			}
-			html.dark .copy-btn:hover {
-				background-color: var(--toggle-btn-hover-bg-dark);
-			}
-			.copy-btn.copied {
-				background-color: #28a745; /* Success green */
-			}
-
-			.theme-toggle-button {
-				background-color: var(--toggle-btn-bg-light);
-				padding: 0.5rem; /* Equivalente a p-2 di Tailwind */
-				border-radius: 0.375rem; /* Equivalente a rounded-md di Tailwind */
-				cursor: pointer;
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				transition: background-color 0.15s ease-in-out; /* duration-150 */
-				border: none;
-				line-height: 1; /* Per allineare meglio l'SVG se ci fosse testo */
-			}
-			.theme-toggle-button:hover {
-				background-color: var(--toggle-btn-hover-bg-light);
-			}
-			.theme-toggle-button svg {
-				width: 1.25rem; /* Equivalente a h-5 w-5 di Tailwind */
-				height: 1.25rem;
-				stroke: var(--toggle-btn-icon-color); /* Icona bianca come text-white */
-				fill: none;
-				stroke-width: 1.5; /* Coerente con gli SVG forniti */
-			}
-
-			/* Show moon icon in light mode */
-			html:not(.dark) .icon-sun {
-				display: none;
-			}
-			html:not(.dark) .icon-moon {
-				display: block;
-			}
-			/* Show sun icon in dark mode */
-			html.dark .icon-moon {
-				display: none;
-			}
-			html.dark .icon-sun {
-				display: block;
-			}
-			html.dark .theme-toggle-button {
-				background-color: var(--toggle-btn-bg-dark);
-			}
-			html.dark .theme-toggle-button:hover {
-				background-color: var(--toggle-btn-hover-bg-dark);
-			}
-
-			.download-button {
-				display: inline-block;
-				padding: 0.6em 1.2em;
-				background-color: var(--link-color-light);
-				color: white;
-				text-decoration: none;
-				border-radius: 4px;
-				border: 1px solid transparent;
-				font-weight: 500;
-				transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
-			}
-			.download-button:hover {
-				background-color: var(--link-hover-light);
-				color: white;
-				text-decoration: none;
-			}
-			html.dark .download-button {
-				background-color: var(--link-color-dark);
-				color: var(--body-bg-dark);
-			}
-			html.dark .download-button:hover {
-				background-color: var(--link-hover-dark);
-				color: var(--body-bg-dark);
-			}
-		</style>
+		<!-- Custom Styles -->
+		<link rel="stylesheet" href="style.css" />
 	</head>
-	<body>
-		<header class="site-header">
-			<h1>Guida Admin Windows</h1>
-			<button
-				id="themeToggle"
-				class="theme-toggle-button"
-				aria-label="Toggle theme"
-				title="Toggle Light/Dark Mode"
+	<body
+		class="bg-slate-50 text-slate-800 dark:bg-slate-900 dark:text-slate-200 transition-colors duration-300 min-h-screen font-sans antialiased selection:bg-blue-100 dark:selection:bg-blue-900"
+	>
+		<header
+			class="fixed top-0 left-0 right-0 z-50 glass shadow-sm dark:shadow-slate-950/20 transition-all duration-300"
+		>
+			<div
+				class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center"
 			>
-				<svg
-					class="icon-sun"
-					xmlns="http://www.w3.org/2000/svg"
-					viewBox="0 0 24 24"
-					stroke-width="1.5"
+				<h1
+					class="text-xl font-bold tracking-tight text-slate-900 dark:text-slate-100"
 				>
-					<path
+					Guida Admin Windows
+				</h1>
+				<button
+					id="themeToggle"
+					class="p-2.5 rounded-xl bg-slate-200/50 hover:bg-slate-200 dark:bg-slate-800/50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500/50"
+					aria-label="Toggle theme"
+					title="Toggle Light/Dark Mode"
+				>
+					<!-- Sun Icon -->
+					<svg
+						class="icon-sun w-5 h-5 hidden dark:block text-slate-200"
+						xmlns="http://www.w3.org/2000/svg"
+						viewBox="0 0 24 24"
+						stroke-width="1.5"
+						stroke="currentColor"
+						fill="none"
 						stroke-linecap="round"
 						stroke-linejoin="round"
-						d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z"
-					/>
-				</svg>
-				<svg
-					class="icon-moon"
-					xmlns="http://www.w3.org/2000/svg"
-					viewBox="0 0 24 24"
-					stroke-width="1.5"
-				>
-					<path
+					>
+						<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+						<path d="M12 12m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" />
+						<path
+							d="M3 12h1m8 -9v1m8 8h1m-9 8v1m-6.4 -15.4l.7 .7m12.1 -.7l-.7 .7m0 11.4l.7 .7m-12.1 -.7l-.7 .7"
+						/>
+					</svg>
+					<!-- Moon Icon -->
+					<svg
+						class="icon-moon w-5 h-5 block dark:hidden text-slate-700"
+						xmlns="http://www.w3.org/2000/svg"
+						viewBox="0 0 24 24"
+						stroke-width="1.5"
+						stroke="currentColor"
+						fill="none"
 						stroke-linecap="round"
 						stroke-linejoin="round"
-						d="M21.752 15.002A9.718 9.718 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z"
-					/>
-				</svg>
-			</button>
+					>
+						<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+						<path
+							d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z"
+						/>
+					</svg>
+				</button>
+			</div>
 		</header>
 
-		<h1>Guida: Creare un Account Admin e Rimuovere ESET su Windows</h1>
-		<p>
-			Questa guida ti spiega passo per passo come creare un account
-			amministratore su un PC Windows usando il Prompt dei comandi dalla
-			modalità di ripristino, e come disinstallare manualmente prodotti ESET.
-		</p>
+		<div
+			class="max-w-7xl mx-auto px-6 pt-24 pb-12 lg:grid lg:grid-cols-12 lg:gap-12 animate-fade-in"
+		>
+			<!-- Main Content Column -->
+			<main class="lg:col-span-9 space-y-12">
+				<section>
+					<h1
+						class="text-4xl md:text-5xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-violet-600 dark:from-blue-400 dark:to-violet-400 mb-6 leading-tight"
+					>
+						Guida: Creare un Account Admin e Rimuovere ESET su Windows
+					</h1>
+					<p
+						class="text-lg md:text-xl text-slate-600 dark:text-slate-400 leading-relaxed"
+					>
+						Questa guida ti spiega passo per passo come creare un account
+						amministratore su un PC Windows usando il Prompt dei comandi dalla
+						modalità di ripristino, e come disinstallare manualmente prodotti
+						ESET.
+					</p>
+				</section>
 
-		<div class="toc">
-			<h2>Indice dei Contenuti</h2>
-			<ul>
-				<li><a href="#prerequisiti">1. Prerequisiti</a></li>
-				<li><a href="#parte1">2. Creazione dell'Account Admin</a></li>
-				<li><a href="#parte2">3. Ripristinare Utilman</a></li>
-				<li><a href="#parte3">4. Disinstallare Prodotti ESET</a></li>
-				<li><a href="#sicurezza">5. Note sulla Sicurezza</a></li>
-			</ul>
-		</div>
-
-		<h2 id="prerequisiti">1. Prerequisiti</h2>
-		<ul>
-			<li>
-				<strong>Accesso fisico</strong> al computer. Questa procedura non può
-				essere eseguita da remoto.
-			</li>
-			<li>
-				Una conoscenza di base di come navigare nel
-				<strong>Prompt dei comandi</strong> (<code>cd</code>, <code>dir</code>,
-				etc.).
-			</li>
-			<li>
-				Un <strong>backup dei dati importanti</strong>. Sebbene la procedura sia
-				relativamente sicura, è sempre buona norma avere un backup prima di
-				apportare modifiche a livello di sistema.
-			</li>
-		</ul>
-		<hr />
-
-		<h2 id="parte1">2. 🛠️ Creazione dell'Account Admin</h2>
-
-		<h3>1. Riavviare il PC in Modalità di Ripristino</h3>
-		<p>
-			Tieni premuto <strong>Maiusc/Shift</strong> e clicca su
-			<strong>Riavvia</strong> dal menu Start.
-		</p>
-
-		<h3>2. Aprire il Prompt dei Comandi</h3>
-		<p>Dalla schermata di ripristino:</p>
-		<ol>
-			<li><strong>Risoluzione dei problemi</strong></li>
-			<li><strong>Opzioni avanzate</strong></li>
-			<li><strong>Prompt dei comandi</strong></li>
-		</ol>
-
-		<h3>3. Sostituire Utilman con il Prompt dei comandi</h3>
-		<p>Inserisci i seguenti comandi, uno alla volta, premendo Invio dopo ognuno:</p>
-		<pre><button class="copy-btn" title="Copy to Clipboard">Copia</button><code>C:</code></pre>
-		<pre><button class="copy-btn" title="Copy to Clipboard">Copia</button><code>cd Windows\System32</code></pre>
-		<pre><button class="copy-btn" title="Copy to Clipboard">Copia</button><code>ren Utilman.exe Utilman.exe.bak</code></pre>
-		<pre><button class="copy-btn" title="Copy to Clipboard">Copia</button><code>copy cmd.exe Utilman.exe</code></pre>
-		<div class="note">
-			La lettera potrebbe variare in base alla partizione dove è installato
-			Windows; di default è <code>C</code>.
-		</div>
-
-		<h3>4. Riavvia il PC</h3>
-		<p>
-			Chiudi il Prompt dei comandi cliccando la <strong>X</strong> in alto a
-			destra e riavvia il computer.
-		</p>
-
-		<h3>5. Aprire il Prompt dei comandi dalla schermata di accesso</h3>
-		<p>
-			Alla schermata di login, clicca sull’<strong
-				>icona dell’accessibilità</strong
-			>
-			(l’omino stilizzato in basso a destra). Si aprirà il Prompt dei comandi.
-		</p>
-
-		<h3>6. Creare l’account amministratore</h3>
-		<p>
-			Sostituisci <code>NomeUtente</code> e <code>Password</code> con i dati
-			desiderati ed esegui questi due comandi, uno alla volta:
-		</p>
-		<pre><button class="copy-btn" title="Copy to Clipboard">Copia</button><code>net user NomeUtente Password /add</code></pre>
-		<pre><button class="copy-btn" title="Copy to Clipboard">Copia</button><code>net localgroup administrators NomeUtente /add</code></pre>
-
-		<h3>7. Accedere con il nuovo utente</h3>
-		<ul>
-			<li>
-				Alla schermata di accesso, seleziona <strong>Altro utente</strong>
-			</li>
-			<li>Inserisci le credenziali dell’account appena creato</li>
-			<li>
-				<strong>IMPORTANTE</strong>: metti <code>.\</code> prima del nome utente
-				per forzare l’accesso locale: <code>.\NomeUtente</code>
-			</li>
-		</ul>
-
-		<h3>8. Verifica dei privilegi</h3>
-		<p>
-			Dopo l’accesso, premi <code>Win + X</code> e clicca su
-			<strong>Terminale (Admin)</strong> per verificare di avere i privilegi da
-			amministratore.
-		</p>
-		<hr />
-
-		<h2 id="parte2">3. ♻️ Ripristinare Utilman</h2>
-
-		<h3>1. Riavviare in Modalità di Ripristino</h3>
-		<p>Segui lo stesso procedimento di prima.</p>
-
-		<h3>2. Aprire il Prompt dei Comandi</h3>
-		<p>Inserisci i seguenti comandi, uno alla volta, premendo Invio dopo ognuno:</p>
-		<pre><button class="copy-btn" title="Copy to Clipboard">Copia</button><code>C:</code></pre>
-		<pre><button class="copy-btn" title="Copy to Clipboard">Copia</button><code>cd Windows\System32</code></pre>
-		<pre><button class="copy-btn" title="Copy to Clipboard">Copia</button><code>del Utilman.exe</code></pre>
-		<pre><button class="copy-btn" title="Copy to Clipboard">Copia</button><code>ren Utilman.exe.bak Utilman.exe</code></pre>
-
-		<h3>3. Riavviare il PC</h3>
-		<p>
-			Alla schermata di accesso, l’icona dell’accessibilità ora aprirà di nuovo
-			il menu corretto.
-		</p>
-		<hr />
-
-		<h2 id="parte3">4. 🗑️ Disinstallare Prodotti ESET</h2>
-		<p>
-			Questa sezione descrive come utilizzare lo strumento ESET Uninstaller per
-			rimuovere un prodotto ESET quando i metodi di disinstallazione standard
-			falliscono. <strong>Usare questo strumento come ultima risorsa.</strong>
-		</p>
-
-		<div class="warning">
-			<p><strong>Attenzione:</strong></p>
-			<ul>
-				<li>
-					Prima di procedere, assicurati di avere un
-					<strong>backup dei dati importanti</strong>.
-				</li>
-				<li>
-					L'utilizzo di ESET Uninstaller potrebbe
-					<strong>resettare le impostazioni di rete di Windows</strong>.
-				</li>
-				<li>
-					È necessario riavviare il PC in <strong>Modalità Provvisoria</strong>.
-				</li>
-			</ul>
-		</div>
-
-		<h3>1. Scaricare ESET Uninstaller</h3>
-		<p>
-			Scarica lo strumento dal seguente link e salvalo sul Desktop o in una
-			cartella facilmente accessibile:<br /><br />
-			<a
-				href="https://download.eset.com/com/eset/tools/installers/eset_apps_remover/latest/uninstaller.exe"
-				target="_blank"
-				rel="noopener noreferrer"
-				class="download-button"
-				>Scarica ESET Uninstaller</a
-			>
-		</p>
-
-		<h3>2. Riavviare il PC in Modalità Provvisoria</h3>
-		<p><strong>Metodo principale</strong> (Opzioni di avvio avanzate):</p>
-		<ul>
-			<li>
-				Tenere premuto il tasto <strong>Maiusc/Shift</strong> e cliccare su
-				<strong>Riavvia</strong> (dal menu Start o dalla schermata di accesso).
-			</li>
-			<li>
-				Alla schermata di riavvio, selezionare:
-				<ol>
-					<li><strong>Risoluzione dei problemi</strong></li>
-					<li><strong>Opzioni avanzate</strong></li>
-					<li>
-						<strong>Impostazioni di avvio</strong> (se non visibile, cercare
-						"Visualizza altre opzioni di ripristino")
-					</li>
-				</ol>
-			</li>
-			<li>Cliccare su <strong>Riavvia</strong>.</li>
-			<li>
-				Al successivo riavvio, premere il tasto numerico corrispondente
-				all'opzione desiderata:
-				<ul>
-					<li>
-						<strong>4</strong> o <strong>F4</strong> per "Abilita modalità
-						provvisoria".
-					</li>
-					<li>
-						<strong>5</strong> o <strong>F5</strong> per "Abilita modalità
-						provvisoria con rete" (se ESET Uninstaller deve essere scaricato).
-					</li>
-				</ul>
-			</li>
-		</ul>
-		<p><strong>Metodo alternativo</strong> (tramite <code>msconfig</code>):</p>
-		<ul>
-			<li>
-				Premere <code>Win + R</code>, digitare <code>msconfig</code> e premere
-				Invio.
-			</li>
-			<li>Accedere alla scheda <strong>Opzioni di avvio</strong>.</li>
-			<li>
-				Selezionare <strong>Modalità provvisoria</strong> ("Minima" o "Rete").
-			</li>
-			<li>Cliccare <strong>OK</strong>, quindi <strong>Riavvia</strong>.</li>
-			<li>
-				<strong>Nota:</strong> Se si utilizza <code>msconfig</code>, è
-				imperativo rieseguire <code>msconfig</code> in Modalità Provvisoria e
-				deselezionare "Modalità provvisoria" prima del riavvio finale, per
-				evitare avvii successivi in questa modalità.
-			</li>
-		</ul>
-
-		<h3>3. Eseguire ESET Uninstaller</h3>
-		<ul>
-			<li>
-				Una volta in Modalità Provvisoria, apri il
-				<strong>Prompt dei comandi come amministratore</strong>:
-				<ul>
-					<li>Cerca "cmd" nel menu Start.</li>
-					<li>
-						Clicca con il tasto destro su "Prompt dei comandi" e seleziona
-						"Esegui come amministratore".
-					</li>
-				</ul>
-			</li>
-			<li>
-				Naviga alla directory dove hai salvato <code>uninstaller.exe</code>.
-				Ad esempio, se l'hai salvato sul Desktop del tuo utente:
-				<pre><button class="copy-btn" title="Copy to Clipboard">Copia</button><code>cd C:\Users\NomeUtente\Desktop</code></pre>
-				<em
-					>(Sostituisci <code>NomeUtente</code> con il nome effettivo del tuo
-					profilo utente)</em
+				<!-- Mobile Table of Contents (Inline) -->
+				<div
+					class="toc lg:hidden glass rounded-2xl p-6 shadow-sm ring-1 ring-slate-900/5 dark:ring-white/10"
 				>
-			</li>
-			<li>
-				Esegui lo strumento digitando:
-				<pre><button class="copy-btn" title="Copy to Clipboard">Copia</button><code>uninstaller.exe</code></pre>
-			</li>
-			<li>
-				Leggi attentamente le avvertenze e digita <code>y</code> per confermare.
-			</li>
-			<li>
-				Lo strumento elencherà i prodotti ESET installati. Digita il numero
-				corrispondente al prodotto che vuoi rimuovere e premi Invio.
-			</li>
-			<li>Conferma nuovamente la disinstallazione digitando <code>y</code>.</li>
-			<li>
-				Al termine del processo, lo strumento ti chiederà di riavviare il
-				computer. Premi un tasto qualsiasi per chiudere lo strumento.
-			</li>
-		</ul>
+					<h2
+						class="text-xl font-bold mb-4 text-slate-900 dark:text-slate-100 flex items-center gap-2"
+					>
+						<span class="text-blue-500">📑</span> Indice dei Contenuti
+					</h2>
+					<ul class="space-y-2 text-slate-700 dark:text-slate-300 font-medium">
+						<li>
+							<a
+								href="#prerequisiti"
+								class="block p-2 rounded-lg hover:bg-white/50 dark:hover:bg-white/5 hover:text-blue-600 dark:hover:text-blue-400 transition-all"
+								>1. Prerequisiti</a
+							>
+						</li>
+						<li>
+							<a
+								href="#parte1"
+								class="block p-2 rounded-lg hover:bg-white/50 dark:hover:bg-white/5 hover:text-blue-600 dark:hover:text-blue-400 transition-all"
+								>2. Creazione dell'Account Admin</a
+							>
+						</li>
+						<li>
+							<a
+								href="#parte2"
+								class="block p-2 rounded-lg hover:bg-white/50 dark:hover:bg-white/5 hover:text-blue-600 dark:hover:text-blue-400 transition-all"
+								>3. Ripristinare Utilman</a
+							>
+						</li>
+						<li>
+							<a
+								href="#parte3"
+								class="block p-2 rounded-lg hover:bg-white/50 dark:hover:bg-white/5 hover:text-blue-600 dark:hover:text-blue-400 transition-all"
+								>4. Disinstallare Prodotti ESET</a
+							>
+						</li>
+						<li>
+							<a
+								href="#sicurezza"
+								class="block p-2 rounded-lg hover:bg-white/50 dark:hover:bg-white/5 hover:text-blue-600 dark:hover:text-blue-400 transition-all"
+								>5. Note sulla Sicurezza</a
+							>
+						</li>
+					</ul>
+				</div>
 
-		<h3>4. Riavviare in Modalità Normale</h3>
-		<ul>
-			<li>
-				Prima di riavviare, se hai usato <code>msconfig</code> per entrare in
-				Modalità Provvisoria, rieseguilo e deseleziona "Modalità provvisoria"
-				nella scheda "Opzioni di avvio".
-			</li>
-			<li>Riavvia il computer.</li>
-			<li>
-				Dopo il riavvio, elimina il file <code>uninstaller.exe</code> dal
-				Desktop (o da dove l'avevi salvato).
-			</li>
-		</ul>
-		<p>Il prodotto ESET dovrebbe essere stato rimosso.</p>
-		<hr />
+				<!-- Section 1 -->
+				<section id="prerequisiti" class="scroll-mt-28">
+					<h2
+						class="text-2xl font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-3"
+					>
+						<span
+							class="flex items-center justify-center w-8 h-8 rounded-lg bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 text-sm"
+							>1</span
+						>
+						Prerequisiti
+					</h2>
+					<ul
+						class="list-disc pl-5 space-y-3 text-slate-700 dark:text-slate-300 marker:text-blue-500"
+					>
+						<li>
+							<strong>Accesso fisico</strong> al computer. Questa procedura non
+							può essere eseguita da remoto.
+						</li>
+						<li>
+							Una conoscenza di base di come navigare nel
+							<strong>Prompt dei comandi</strong> (<code
+								class="px-1.5 py-0.5 rounded bg-slate-200 dark:bg-slate-700 font-mono text-sm text-slate-800 dark:text-slate-200"
+								>cd</code
+							>,
+							<code
+								class="px-1.5 py-0.5 rounded bg-slate-200 dark:bg-slate-700 font-mono text-sm text-slate-800 dark:text-slate-200"
+								>dir</code
+							>, etc.).
+						</li>
+						<li>
+							Un <strong>backup dei dati importanti</strong>. Sebbene la
+							procedura sia relativamente sicura, è sempre buona norma avere un
+							backup prima di apportare modifiche a livello di sistema.
+						</li>
+					</ul>
+					<hr class="my-8 border-slate-200 dark:border-slate-800" />
+				</section>
 
-		<h2 id="sicurezza">5. ℹ️ Note sulla Sicurezza</h2>
-		<ul>
-			<li>
-				<strong>Maiusc/Shift ≠ Bloc Maiusc</strong>: usa il tasto corretto!
-			</li>
-			<li>
-				Questi metodi sono utili se hai accesso fisico al PC ma hai perso
-				l’account principale o hai problemi con software specifici.
-			</li>
-			<li>
-				Usali solo in contesti leciti e con autorizzazione, o sul tuo 
-				computer personale.
-			</li>
-		</ul>
+				<!-- Section 2 -->
+				<section id="parte1" class="scroll-mt-28">
+					<h2
+						class="text-2xl font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-3"
+					>
+						<span
+							class="flex items-center justify-center w-8 h-8 rounded-lg bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 text-sm"
+							>2</span
+						>
+						🛠️ Creazione dell'Account Admin
+					</h2>
 
-		<p>
-			© Guida a scopo didattico
-		</p>
+					<div class="space-y-8">
+						<div>
+							<h3
+								class="text-xl font-semibold text-slate-800 dark:text-slate-200 mb-2"
+							>
+								1. Riavviare il PC in Modalità di Ripristino
+							</h3>
+							<p class="text-slate-600 dark:text-slate-400">
+								Tieni premuto
+								<strong
+									class="text-slate-900 dark:text-slate-100 font-medium bg-slate-200 dark:bg-slate-700 px-1 rounded"
+									>Maiusc/Shift</strong
+								>
+								e clicca su <strong>Riavvia</strong> dal menu Start.
+							</p>
+						</div>
+
+						<div>
+							<h3
+								class="text-xl font-semibold text-slate-800 dark:text-slate-200 mb-2"
+							>
+								2. Aprire il Prompt dei Comandi
+							</h3>
+							<p class="text-slate-600 dark:text-slate-400 mb-3">
+								Dalla schermata di ripristino:
+							</p>
+							<ol
+								class="list-decimal pl-5 space-y-2 text-slate-700 dark:text-slate-300 marker:text-slate-400 marker:font-medium"
+							>
+								<li><strong>Risoluzione dei problemi</strong></li>
+								<li><strong>Opzioni avanzate</strong></li>
+								<li><strong>Prompt dei comandi</strong></li>
+							</ol>
+						</div>
+
+						<div>
+							<h3
+								class="text-xl font-semibold text-slate-800 dark:text-slate-200 mb-2"
+							>
+								3. Sostituire Utilman con il Prompt dei comandi
+							</h3>
+							<p class="text-slate-600 dark:text-slate-400 mb-4">
+								Inserisci i seguenti comandi, uno alla volta, premendo Invio
+								dopo ognuno:
+							</p>
+
+							<div class="space-y-3">
+								<!-- Code blocks -->
+								<div class="relative group">
+									<pre
+										class="bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg p-4 font-mono text-sm text-slate-800 dark:text-slate-200 overflow-x-auto"
+									><code>C:</code></pre>
+									<button
+										class="copy-btn absolute top-2 right-2 p-1.5 rounded-md bg-white dark:bg-slate-700 shadow-sm opacity-0 group-hover:opacity-100 transition-opacity text-xs font-medium text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400"
+										title="Copy to Clipboard"
+									>
+										Copia
+									</button>
+								</div>
+								<div class="relative group">
+									<pre
+										class="bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg p-4 font-mono text-sm text-slate-800 dark:text-slate-200 overflow-x-auto"
+									><code>cd Windows\System32</code></pre>
+									<button
+										class="copy-btn absolute top-2 right-2 p-1.5 rounded-md bg-white dark:bg-slate-700 shadow-sm opacity-0 group-hover:opacity-100 transition-opacity text-xs font-medium text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400"
+										title="Copy to Clipboard"
+									>
+										Copia
+									</button>
+								</div>
+								<div class="relative group">
+									<pre
+										class="bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg p-4 font-mono text-sm text-slate-800 dark:text-slate-200 overflow-x-auto"
+									><code>ren Utilman.exe Utilman.exe.bak</code></pre>
+									<button
+										class="copy-btn absolute top-2 right-2 p-1.5 rounded-md bg-white dark:bg-slate-700 shadow-sm opacity-0 group-hover:opacity-100 transition-opacity text-xs font-medium text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400"
+										title="Copy to Clipboard"
+									>
+										Copia
+									</button>
+								</div>
+								<div class="relative group">
+									<pre
+										class="bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg p-4 font-mono text-sm text-slate-800 dark:text-slate-200 overflow-x-auto"
+									><code>copy cmd.exe Utilman.exe</code></pre>
+									<button
+										class="copy-btn absolute top-2 right-2 p-1.5 rounded-md bg-white dark:bg-slate-700 shadow-sm opacity-0 group-hover:opacity-100 transition-opacity text-xs font-medium text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400"
+										title="Copy to Clipboard"
+									>
+										Copia
+									</button>
+								</div>
+							</div>
+
+							<div
+								class="mt-4 p-4 rounded-lg bg-sky-50 dark:bg-sky-900/30 border border-sky-200 dark:border-sky-800 text-sky-800 dark:text-sky-200 text-sm flex gap-3"
+							>
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									class="h-5 w-5 shrink-0"
+									viewBox="0 0 20 20"
+									fill="currentColor"
+								>
+									<path
+										fill-rule="evenodd"
+										d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+										clip-rule="evenodd"
+									/>
+								</svg>
+								<p>
+									La lettera potrebbe variare in base alla partizione dove è
+									installato Windows; di default è
+									<code class="font-mono font-bold">C</code>.
+								</p>
+							</div>
+						</div>
+
+						<div>
+							<h3
+								class="text-xl font-semibold text-slate-800 dark:text-slate-200 mb-2"
+							>
+								4. Riavvia il PC
+							</h3>
+							<p class="text-slate-600 dark:text-slate-400">
+								Chiudi il Prompt dei comandi cliccando la
+								<strong class="text-slate-900 dark:text-slate-100">X</strong> in
+								alto a destra e riavvia il computer.
+							</p>
+						</div>
+
+						<div>
+							<h3
+								class="text-xl font-semibold text-slate-800 dark:text-slate-200 mb-2"
+							>
+								5. Aprire il Prompt dei comandi dalla schermata di accesso
+							</h3>
+							<p class="text-slate-600 dark:text-slate-400">
+								Alla schermata di login, clicca sull’<strong
+									class="text-slate-900 dark:text-slate-100"
+									>icona dell’accessibilità</strong
+								>
+								(l’omino stilizzato in basso a destra). Si aprirà il Prompt dei
+								comandi.
+							</p>
+						</div>
+
+						<div>
+							<h3
+								class="text-xl font-semibold text-slate-800 dark:text-slate-200 mb-2"
+							>
+								6. Creare l’account amministratore
+							</h3>
+							<p class="text-slate-600 dark:text-slate-400 mb-4">
+								Sostituisci
+								<code
+									class="px-1.5 py-0.5 rounded bg-slate-200 dark:bg-slate-700 font-mono text-sm text-slate-800 dark:text-slate-200"
+									>NomeUtente</code
+								>
+								e
+								<code
+									class="px-1.5 py-0.5 rounded bg-slate-200 dark:bg-slate-700 font-mono text-sm text-slate-800 dark:text-slate-200"
+									>Password</code
+								>
+								con i dati desiderati ed esegui questi due comandi:
+							</p>
+							<div class="space-y-3">
+								<div class="relative group">
+									<pre
+										class="bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg p-4 font-mono text-sm text-slate-800 dark:text-slate-200 overflow-x-auto"
+									><code>net user NomeUtente Password /add</code></pre>
+									<button
+										class="copy-btn absolute top-2 right-2 p-1.5 rounded-md bg-white dark:bg-slate-700 shadow-sm opacity-0 group-hover:opacity-100 transition-opacity text-xs font-medium text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400"
+										title="Copy to Clipboard"
+									>
+										Copia
+									</button>
+								</div>
+								<div class="relative group">
+									<pre
+										class="bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg p-4 font-mono text-sm text-slate-800 dark:text-slate-200 overflow-x-auto"
+									><code>net localgroup administrators NomeUtente /add</code></pre>
+									<button
+										class="copy-btn absolute top-2 right-2 p-1.5 rounded-md bg-white dark:bg-slate-700 shadow-sm opacity-0 group-hover:opacity-100 transition-opacity text-xs font-medium text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400"
+										title="Copy to Clipboard"
+									>
+										Copia
+									</button>
+								</div>
+							</div>
+						</div>
+
+						<div>
+							<h3
+								class="text-xl font-semibold text-slate-800 dark:text-slate-200 mb-2"
+							>
+								7. Accedere con il nuovo utente
+							</h3>
+							<ul
+								class="list-disc pl-5 space-y-2 text-slate-600 dark:text-slate-400"
+							>
+								<li>
+									Alla schermata di accesso, seleziona
+									<strong>Altro utente</strong>
+								</li>
+								<li>Inserisci le credenziali dell’account appena creato</li>
+								<li>
+									<strong class="text-amber-600 dark:text-amber-400"
+										>IMPORTANTE</strong
+									>: metti
+									<code
+										class="px-1.5 py-0.5 rounded bg-slate-200 dark:bg-slate-700 font-mono text-sm text-slate-800 dark:text-slate-200"
+										>.\</code
+									>
+									prima del nome utente per forzare l’accesso locale:
+									<code
+										class="px-1.5 py-0.5 rounded bg-slate-200 dark:bg-slate-700 font-mono text-sm text-slate-800 dark:text-slate-200"
+										>.\NomeUtente</code
+									>
+								</li>
+							</ul>
+						</div>
+
+						<div>
+							<h3
+								class="text-xl font-semibold text-slate-800 dark:text-slate-200 mb-2"
+							>
+								8. Verifica dei privilegi
+							</h3>
+							<p class="text-slate-600 dark:text-slate-400">
+								Dopo l’accesso, premi
+								<code
+									class="px-1.5 py-0.5 rounded bg-slate-200 dark:bg-slate-700 font-mono text-sm text-slate-800 dark:text-slate-200"
+									>Win + X</code
+								>
+								e clicca su <strong>Terminale (Admin)</strong> per verificare di
+								avere i privilegi da amministratore.
+							</p>
+						</div>
+					</div>
+					<hr class="my-10 border-slate-200 dark:border-slate-800" />
+				</section>
+
+				<!-- Section 3 -->
+				<section id="parte2" class="scroll-mt-28">
+					<h2
+						class="text-2xl font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-3"
+					>
+						<span
+							class="flex items-center justify-center w-8 h-8 rounded-lg bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 text-sm"
+							>3</span
+						>
+						♻️ Ripristinare Utilman
+					</h2>
+					<div class="space-y-8">
+						<div>
+							<h3
+								class="text-xl font-semibold text-slate-800 dark:text-slate-200 mb-2"
+							>
+								1. Riavviare in Modalità di Ripristino
+							</h3>
+							<p class="text-slate-600 dark:text-slate-400">
+								Segui lo stesso procedimento di prima.
+							</p>
+						</div>
+
+						<div>
+							<h3
+								class="text-xl font-semibold text-slate-800 dark:text-slate-200 mb-2"
+							>
+								2. Aprire il Prompt dei Comandi
+							</h3>
+							<p class="text-slate-600 dark:text-slate-400 mb-4">
+								Inserisci i seguenti comandi:
+							</p>
+							<div class="space-y-3">
+								<div class="relative group">
+									<pre
+										class="bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg p-4 font-mono text-sm text-slate-800 dark:text-slate-200 overflow-x-auto"
+									><code>C:</code></pre>
+									<button
+										class="copy-btn absolute top-2 right-2 p-1.5 rounded-md bg-white dark:bg-slate-700 shadow-sm opacity-0 group-hover:opacity-100 transition-opacity text-xs font-medium text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400"
+										title="Copy to Clipboard"
+									>
+										Copia
+									</button>
+								</div>
+								<div class="relative group">
+									<pre
+										class="bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg p-4 font-mono text-sm text-slate-800 dark:text-slate-200 overflow-x-auto"
+									><code>cd Windows\System32</code></pre>
+									<button
+										class="copy-btn absolute top-2 right-2 p-1.5 rounded-md bg-white dark:bg-slate-700 shadow-sm opacity-0 group-hover:opacity-100 transition-opacity text-xs font-medium text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400"
+										title="Copy to Clipboard"
+									>
+										Copia
+									</button>
+								</div>
+								<div class="relative group">
+									<pre
+										class="bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg p-4 font-mono text-sm text-slate-800 dark:text-slate-200 overflow-x-auto"
+									><code>del Utilman.exe</code></pre>
+									<button
+										class="copy-btn absolute top-2 right-2 p-1.5 rounded-md bg-white dark:bg-slate-700 shadow-sm opacity-0 group-hover:opacity-100 transition-opacity text-xs font-medium text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400"
+										title="Copy to Clipboard"
+									>
+										Copia
+									</button>
+								</div>
+								<div class="relative group">
+									<pre
+										class="bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg p-4 font-mono text-sm text-slate-800 dark:text-slate-200 overflow-x-auto"
+									><code>ren Utilman.exe.bak Utilman.exe</code></pre>
+									<button
+										class="copy-btn absolute top-2 right-2 p-1.5 rounded-md bg-white dark:bg-slate-700 shadow-sm opacity-0 group-hover:opacity-100 transition-opacity text-xs font-medium text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400"
+										title="Copy to Clipboard"
+									>
+										Copia
+									</button>
+								</div>
+							</div>
+						</div>
+
+						<div>
+							<h3
+								class="text-xl font-semibold text-slate-800 dark:text-slate-200 mb-2"
+							>
+								3. Riavviare il PC
+							</h3>
+							<p class="text-slate-600 dark:text-slate-400">
+								Alla schermata di accesso, l’icona dell’accessibilità ora aprirà
+								di nuovo il menu corretto.
+							</p>
+						</div>
+					</div>
+					<hr class="my-10 border-slate-200 dark:border-slate-800" />
+				</section>
+
+				<!-- Section 4 -->
+				<section id="parte3" class="scroll-mt-28">
+					<h2
+						class="text-2xl font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-3"
+					>
+						<span
+							class="flex items-center justify-center w-8 h-8 rounded-lg bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 text-sm"
+							>4</span
+						>
+						🗑️ Disinstallare Prodotti ESET
+					</h2>
+					<p class="text-slate-600 dark:text-slate-400 mb-6">
+						Questa sezione descrive come utilizzare lo strumento ESET
+						Uninstaller per rimuovere un prodotto ESET quando i metodi di
+						disinstallazione standard falliscono.
+						<strong>Usare questo strumento come ultima risorsa.</strong>
+					</p>
+
+					<div
+						class="mb-8 p-6 rounded-xl bg-amber-50 dark:bg-amber-900/20 border-l-4 border-amber-500 dark:border-amber-600"
+					>
+						<div class="flex items-start gap-4">
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								class="h-6 w-6 text-amber-600 dark:text-amber-500 shrink-0 mt-0.5"
+								fill="none"
+								viewBox="0 0 24 24"
+								stroke="currentColor"
+								stroke-width="2"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+								/>
+							</svg>
+							<div>
+								<strong class="block text-amber-800 dark:text-amber-200 mb-2"
+									>Attenzione:</strong
+								>
+								<ul
+									class="list-disc pl-5 space-y-1 text-amber-800 dark:text-amber-200/90 text-sm"
+								>
+									<li>
+										Prima di procedere, assicurati di avere un
+										<strong>backup dei dati importanti</strong>.
+									</li>
+									<li>
+										L'utilizzo di ESET Uninstaller potrebbe
+										<strong>resettare le impostazioni di rete di Windows</strong
+										>.
+									</li>
+									<li>
+										È necessario riavviare il PC in
+										<strong>Modalità Provvisoria</strong>.
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+
+					<div class="space-y-8">
+						<div>
+							<h3
+								class="text-xl font-semibold text-slate-800 dark:text-slate-200 mb-4"
+							>
+								1. Scaricare ESET Uninstaller
+							</h3>
+							<p class="text-slate-600 dark:text-slate-400 mb-4">
+								Scarica lo strumento dal seguente link e salvalo sul Desktop o
+								in una cartella facilmente accessibile:
+							</p>
+							<a
+								href="https://download.eset.com/com/eset/tools/installers/eset_apps_remover/latest/uninstaller.exe"
+								target="_blank"
+								rel="noopener noreferrer"
+								class="inline-flex items-center gap-2 px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors font-medium shadow-sm hover:shadow-md"
+							>
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									class="h-5 w-5"
+									fill="none"
+									viewBox="0 0 24 24"
+									stroke="currentColor"
+									stroke-width="2"
+								>
+									<path
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+									/>
+								</svg>
+								Scarica ESET Uninstaller
+							</a>
+						</div>
+
+						<div>
+							<h3
+								class="text-xl font-semibold text-slate-800 dark:text-slate-200 mb-2"
+							>
+								2. Riavviare il PC in Modalità Provvisoria
+							</h3>
+							<div class="space-y-4">
+								<div>
+									<p class="font-medium text-slate-800 dark:text-slate-200">
+										Metodo principale (Opzioni di avvio avanzate):
+									</p>
+									<ul
+										class="list-disc pl-5 mt-2 space-y-2 text-slate-600 dark:text-slate-400"
+									>
+										<li>
+											Tenere premuto <strong>Maiusc/Shift</strong> e cliccare su
+											<strong>Riavvia</strong>.
+										</li>
+										<li>
+											Alla schermata di riavvio, selezionare:
+											<ol class="list-decimal pl-5 mt-1 space-y-1">
+												<li>Risoluzione dei problemi</li>
+												<li>Opzioni avanzate</li>
+												<li>Impostazioni di avvio</li>
+											</ol>
+										</li>
+										<li>Cliccare su <strong>Riavvia</strong>.</li>
+										<li>
+											Al successivo riavvio, apri:
+											<ul class="list-disc pl-5 mt-1">
+												<li><strong>4</strong> per Modalità provvisoria.</li>
+											</ul>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+
+						<div>
+							<h3
+								class="text-xl font-semibold text-slate-800 dark:text-slate-200 mb-2"
+							>
+								3. Eseguire ESET Uninstaller
+							</h3>
+							<ul
+								class="list-disc pl-5 space-y-2 text-slate-600 dark:text-slate-400"
+							>
+								<li>
+									Una volta in Modalità Provvisoria, apri il
+									<strong>Prompt dei comandi</strong> come amministratore.
+								</li>
+								<li>
+									Naviga alla directory dove hai salvato
+									<code>uninstaller.exe</code>:
+									<div class="relative group my-2">
+										<pre
+											class="bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg p-3 font-mono text-sm text-slate-800 dark:text-slate-200"
+										><code>cd C:\Users\NomeUtente\Desktop</code></pre>
+										<button
+											class="copy-btn absolute top-2 right-2 p-1 rounded bg-white dark:bg-slate-700 shadow-sm opacity-0 group-hover:opacity-100 transition-opacity text-xs font-medium text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400"
+											title="Copy to Clipboard"
+										>
+											Copia
+										</button>
+									</div>
+								</li>
+								<li>
+									Esegui:
+									<div class="relative group my-2">
+										<pre
+											class="bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg p-3 font-mono text-sm text-slate-800 dark:text-slate-200"
+										><code>uninstaller.exe</code></pre>
+										<button
+											class="copy-btn absolute top-2 right-2 p-1 rounded bg-white dark:bg-slate-700 shadow-sm opacity-0 group-hover:opacity-100 transition-opacity text-xs font-medium text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400"
+											title="Copy to Clipboard"
+										>
+											Copia
+										</button>
+									</div>
+								</li>
+								<li>
+									Segui le istruzioni a schermo (digita <code>y</code> per
+									confermare).
+								</li>
+							</ul>
+						</div>
+
+						<div>
+							<h3
+								class="text-xl font-semibold text-slate-800 dark:text-slate-200 mb-2"
+							>
+								4. Riavviare in Modalità Normale
+							</h3>
+							<ul
+								class="list-disc pl-5 space-y-2 text-slate-600 dark:text-slate-400"
+							>
+								<li>Riavvia il computer normalmente.</li>
+								<li>Elimina il file <code>uninstaller.exe</code>.</li>
+							</ul>
+						</div>
+					</div>
+					<hr class="my-10 border-slate-200 dark:border-slate-800" />
+				</section>
+
+				<!-- Section 5 -->
+				<section id="sicurezza" class="scroll-mt-28">
+					<h2
+						class="text-2xl font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-3"
+					>
+						<span
+							class="flex items-center justify-center w-8 h-8 rounded-lg bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 text-sm"
+							>5</span
+						>
+						ℹ️ Note sulla Sicurezza
+					</h2>
+					<ul class="space-y-4">
+						<li
+							class="flex items-start gap-3 text-slate-600 dark:text-slate-400"
+						>
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								class="h-5 w-5 text-blue-500 mt-0.5 shrink-0"
+								fill="none"
+								viewBox="0 0 24 24"
+								stroke="currentColor"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									stroke-width="2"
+									d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+								/>
+							</svg>
+							<span
+								><strong>Maiusc/Shift ≠ Bloc Maiusc</strong>: usa il tasto
+								corretto!</span
+							>
+						</li>
+						<li
+							class="flex items-start gap-3 text-slate-600 dark:text-slate-400"
+						>
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								class="h-5 w-5 text-blue-500 mt-0.5 shrink-0"
+								fill="none"
+								viewBox="0 0 24 24"
+								stroke="currentColor"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									stroke-width="2"
+									d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+								/>
+							</svg>
+							<span
+								>Questi metodi sono utili se hai accesso fisico al PC ma hai
+								perso l’account principale.</span
+							>
+						</li>
+						<li
+							class="flex items-start gap-3 text-slate-600 dark:text-slate-400"
+						>
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								class="h-5 w-5 text-blue-500 mt-0.5 shrink-0"
+								fill="none"
+								viewBox="0 0 24 24"
+								stroke="currentColor"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									stroke-width="2"
+									d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+								/>
+							</svg>
+							<span
+								>Usali solo in contesti leciti e con autorizzazione, o sul tuo
+								computer personale.</span
+							>
+						</li>
+					</ul>
+				</section>
+			</main>
+
+			<!-- Sidebar Navigation (Desktop Only) -->
+			<aside class="hidden lg:block lg:col-span-3">
+				<nav class="sticky top-28 self-start space-y-6">
+					<div>
+						<h4
+							class="text-sm font-semibold text-slate-900 dark:text-slate-100 uppercase tracking-wider mb-4 border-b border-slate-200 dark:border-slate-800 pb-2"
+						>
+							Su questa pagina
+						</h4>
+						<ul
+							class="space-y-3 text-sm border-l border-slate-200 dark:border-slate-800"
+						>
+							<li>
+								<a
+									href="#prerequisiti"
+									class="nav-link block pl-4 border-l-2 border-transparent hover:border-slate-400 hover:text-slate-900 dark:hover:text-slate-100 text-slate-500 dark:text-slate-400 transition-all"
+									>Prerequisiti</a
+								>
+							</li>
+							<li>
+								<a
+									href="#parte1"
+									class="nav-link block pl-4 border-l-2 border-transparent hover:border-slate-400 hover:text-slate-900 dark:hover:text-slate-100 text-slate-500 dark:text-slate-400 transition-all"
+									>Creazione Admin</a
+								>
+							</li>
+							<li>
+								<a
+									href="#parte2"
+									class="nav-link block pl-4 border-l-2 border-transparent hover:border-slate-400 hover:text-slate-900 dark:hover:text-slate-100 text-slate-500 dark:text-slate-400 transition-all"
+									>Ripristino Utilman</a
+								>
+							</li>
+							<li>
+								<a
+									href="#parte3"
+									class="nav-link block pl-4 border-l-2 border-transparent hover:border-slate-400 hover:text-slate-900 dark:hover:text-slate-100 text-slate-500 dark:text-slate-400 transition-all"
+									>Rimozione ESET</a
+								>
+							</li>
+							<li>
+								<a
+									href="#sicurezza"
+									class="nav-link block pl-4 border-l-2 border-transparent hover:border-slate-400 hover:text-slate-900 dark:hover:text-slate-100 text-slate-500 dark:text-slate-400 transition-all"
+									>Sicurezza</a
+								>
+							</li>
+						</ul>
+					</div>
+				</nav>
+			</aside>
+		</div>
+
+		<footer
+			class="mt-20 py-8 border-t border-slate-200 dark:border-slate-800 text-center text-slate-500 dark:text-slate-500 text-sm"
+		>
+			<p>© Guida a scopo didattico</p>
+		</footer>
 
 		<script>
 			const themeToggle = document.getElementById("themeToggle");
@@ -719,17 +905,36 @@
 			// --- Copy to Clipboard Functionality ---
 			document.querySelectorAll(".copy-btn").forEach((button) => {
 				button.addEventListener("click", () => {
-					const codeBlock = button.nextElementSibling; // The <code> element
+					// Find the previous sibling element which is the <pre>
+					const codeBlock = button.previousElementSibling;
+					// Inside <pre>, there is a <code>
 					const textToCopy = codeBlock.innerText;
 
 					navigator.clipboard
 						.writeText(textToCopy)
 						.then(() => {
+							const originalText = button.textContent;
 							button.textContent = "Copiato!";
-							button.classList.add("copied");
+							button.classList.add("text-green-600", "dark:text-green-400");
+							button.classList.remove(
+								"text-slate-600",
+								"dark:text-slate-300",
+								"hover:text-blue-600",
+								"dark:hover:text-blue-400",
+							);
+
 							setTimeout(() => {
-								button.textContent = "Copia";
-								button.classList.remove("copied");
+								button.textContent = originalText;
+								button.classList.remove(
+									"text-green-600",
+									"dark:text-green-400",
+								);
+								button.classList.add(
+									"text-slate-600",
+									"dark:text-slate-300",
+									"hover:text-blue-600",
+									"dark:hover:text-blue-400",
+								);
 							}, 2000);
 						})
 						.catch((err) => {
@@ -741,7 +946,7 @@
 
 			const savedTheme = localStorage.getItem("themePreference");
 			const systemPrefersDark = window.matchMedia(
-				"(prefers-color-scheme: dark)"
+				"(prefers-color-scheme: dark)",
 			).matches;
 
 			if (savedTheme) {
@@ -759,7 +964,46 @@
 						applyTheme(e.matches ? "dark" : "light");
 					}
 				});
+
+			// --- Scroll Spy for Sidebar ---
+			const sections = document.querySelectorAll("section[id]");
+			const navLinks = document.querySelectorAll(".nav-link");
+
+			function highlightNavigation() {
+				let scrollY = window.scrollY;
+
+				sections.forEach((current) => {
+					const sectionHeight = current.offsetHeight;
+					const sectionTop = current.offsetTop - 150; // Offset for header
+					const sectionId = current.getAttribute("id");
+
+					if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+						navLinks.forEach((link) => {
+							link.classList.remove(
+								"border-blue-500",
+								"text-blue-600",
+								"dark:text-blue-400",
+								"font-medium",
+							);
+							link.classList.add("border-transparent");
+							if (link.getAttribute("href").includes(sectionId)) {
+								link.classList.remove(
+									"border-transparent",
+									"text-slate-500",
+									"dark:text-slate-400",
+								);
+								link.classList.add(
+									"border-blue-500",
+									"text-blue-600",
+									"dark:text-blue-400",
+									"font-medium",
+								);
+							}
+						});
+					}
+				});
+			}
+			window.addEventListener("scroll", highlightNavigation);
 		</script>
 	</body>
 </html>
-
