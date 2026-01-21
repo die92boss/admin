@@ -47,7 +47,7 @@
 				>
 					<!-- Sun Icon -->
 					<svg
-						class="icon-sun w-5 h-5 hidden dark:block text-slate-200"
+						class="icon-sun w-5 h-5 hidden dark:block text-yellow-500"
 						xmlns="http://www.w3.org/2000/svg"
 						viewBox="0 0 24 24"
 						stroke-width="1.5"
@@ -642,6 +642,9 @@
 							</h3>
 							<div class="space-y-4">
 								<div>
+									<p class="font-medium text-slate-800 dark:text-slate-200">
+										Metodo principale (Opzioni di avvio avanzate):
+									</p>
 									<ul
 										class="list-disc pl-5 mt-2 space-y-2 text-slate-600 dark:text-slate-400"
 									>
@@ -826,45 +829,50 @@
 						>
 							Su questa pagina
 						</h4>
-						<ul
-							class="space-y-3 text-sm border-l border-slate-200 dark:border-slate-800"
-						>
-							<li>
-								<a
-									href="#prerequisiti"
-									class="nav-link block pl-4 border-l-2 border-transparent hover:border-slate-400 hover:text-slate-900 dark:hover:text-slate-100 text-slate-500 dark:text-slate-400 transition-all"
-									>Prerequisiti</a
-								>
-							</li>
-							<li>
-								<a
-									href="#parte1"
-									class="nav-link block pl-4 border-l-2 border-transparent hover:border-slate-400 hover:text-slate-900 dark:hover:text-slate-100 text-slate-500 dark:text-slate-400 transition-all"
-									>Creazione Admin</a
-								>
-							</li>
-							<li>
-								<a
-									href="#parte2"
-									class="nav-link block pl-4 border-l-2 border-transparent hover:border-slate-400 hover:text-slate-900 dark:hover:text-slate-100 text-slate-500 dark:text-slate-400 transition-all"
-									>Ripristino Utilman</a
-								>
-							</li>
-							<li>
-								<a
-									href="#parte3"
-									class="nav-link block pl-4 border-l-2 border-transparent hover:border-slate-400 hover:text-slate-900 dark:hover:text-slate-100 text-slate-500 dark:text-slate-400 transition-all"
-									>Rimozione ESET</a
-								>
-							</li>
-							<li>
-								<a
-									href="#sicurezza"
-									class="nav-link block pl-4 border-l-2 border-transparent hover:border-slate-400 hover:text-slate-900 dark:hover:text-slate-100 text-slate-500 dark:text-slate-400 transition-all"
-									>Sicurezza</a
-								>
-							</li>
-						</ul>
+						<div class="relative">
+							<!-- Sliding Marker -->
+							<div id="navMarker" class="nav-marker h-0 top-0 opacity-0"></div>
+
+							<ul
+								class="space-y-3 text-sm border-l border-slate-200 dark:border-slate-800 relative z-0"
+							>
+								<li>
+									<a
+										href="#prerequisiti"
+										class="nav-link block pl-4 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-colors duration-200"
+										>Prerequisiti</a
+									>
+								</li>
+								<li>
+									<a
+										href="#parte1"
+										class="nav-link block pl-4 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-colors duration-200"
+										>Creazione Admin</a
+									>
+								</li>
+								<li>
+									<a
+										href="#parte2"
+										class="nav-link block pl-4 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-colors duration-200"
+										>Ripristino Utilman</a
+									>
+								</li>
+								<li>
+									<a
+										href="#parte3"
+										class="nav-link block pl-4 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-colors duration-200"
+										>Rimozione ESET</a
+									>
+								</li>
+								<li>
+									<a
+										href="#sicurezza"
+										class="nav-link block pl-4 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-colors duration-200"
+										>Sicurezza</a
+									>
+								</li>
+							</ul>
+						</div>
 					</div>
 				</nav>
 			</aside>
@@ -962,44 +970,74 @@
 					}
 				});
 
-			// --- Scroll Spy for Sidebar ---
+			// --- Scroll Spy with Sliding Marker ---
 			const sections = document.querySelectorAll("section[id]");
 			const navLinks = document.querySelectorAll(".nav-link");
+			const navMarker = document.getElementById("navMarker");
 
 			function highlightNavigation() {
 				let scrollY = window.scrollY;
+				let activeLink = null;
 
-				sections.forEach((current) => {
-					const sectionHeight = current.offsetHeight;
-					const sectionTop = current.offsetTop - 150; // Offset for header
-					const sectionId = current.getAttribute("id");
+				// Check if we've reached the bottom of the page
+				if (
+					window.innerHeight + Math.ceil(scrollY) >=
+					document.body.offsetHeight - 10
+				) {
+					const lastSectionId =
+						sections[sections.length - 1].getAttribute("id");
+					navLinks.forEach((link) => {
+						if (link.getAttribute("href").includes(lastSectionId)) {
+							activeLink = link;
+						}
+					});
+				} else {
+					sections.forEach((current) => {
+						const sectionHeight = current.offsetHeight || 100; // fallback height
+						const sectionTop = current.offsetTop - 150; // Offset for header
+						const sectionId = current.getAttribute("id");
 
-					if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-						navLinks.forEach((link) => {
-							link.classList.remove(
-								"border-blue-500",
-								"text-blue-600",
-								"dark:text-blue-400",
-								"font-medium",
-							);
-							link.classList.add("border-transparent");
-							if (link.getAttribute("href").includes(sectionId)) {
-								link.classList.remove(
-									"border-transparent",
-									"text-slate-500",
-									"dark:text-slate-400",
-								);
-								link.classList.add(
-									"border-blue-500",
-									"text-blue-600",
-									"dark:text-blue-400",
-									"font-medium",
-								);
-							}
-						});
-					}
-				});
+						if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+							navLinks.forEach((link) => {
+								if (link.getAttribute("href").includes(sectionId)) {
+									activeLink = link;
+								}
+							});
+						}
+					});
+				}
+
+				if (activeLink) {
+					// Update Text Styles
+					navLinks.forEach((link) => {
+						link.classList.remove(
+							"text-blue-600",
+							"dark:text-blue-400",
+							"font-medium",
+						);
+						link.classList.add("text-slate-500", "dark:text-slate-400");
+					});
+					activeLink.classList.remove("text-slate-500", "dark:text-slate-400");
+					activeLink.classList.add(
+						"text-blue-600",
+						"dark:text-blue-400",
+						"font-medium",
+					);
+
+					// Update Sliding Marker Position
+					// The marker is absolute relative to the 'relative' div wrapper.
+					// The ul has no top margin/padding, so link.parentElement.offsetTop works best.
+
+					navMarker.style.height = `${activeLink.offsetHeight}px`;
+					navMarker.style.top = `${activeLink.offsetTop}px`;
+					navMarker.classList.remove("opacity-0");
+				} else {
+					// Optional: keep it at the last known position or fade out
+					// navMarker.classList.add('opacity-0');
+				}
 			}
+			// Trigger once on load to set initial position
+			setTimeout(highlightNavigation, 100);
 			window.addEventListener("scroll", highlightNavigation);
 		</script>
 	</body>
